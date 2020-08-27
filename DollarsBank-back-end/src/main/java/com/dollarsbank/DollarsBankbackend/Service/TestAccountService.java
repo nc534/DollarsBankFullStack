@@ -57,7 +57,6 @@ public class TestAccountService {
         newAcct.setId(0);
         newAcct.setCustId(1);
         newAcct.setAccountName(onlyValues.get(2));
-        newAcct.setAccType(Long.parseLong(onlyValues.get(3)));
 
         accRepo.save(newAcct);
 
