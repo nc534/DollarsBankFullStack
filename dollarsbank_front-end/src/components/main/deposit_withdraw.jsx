@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 export default class DepositWithdraw extends Component {
 
@@ -37,7 +38,8 @@ export default class DepositWithdraw extends Component {
                         <div>
                             <button type="submit" class="btn">Submit</button>
                             
-                            <button type="button" name="cancel" class="cancel" onclick="history.back()">Cancel</button>
+                            <Link to="/overview" className="cancel">Cancel</Link>
+                            {/* <button type="button" name="cancel" class="cancel" onclick="history.back()">Cancel</button> */}
                         </div>
                     </form>
                 </div>
