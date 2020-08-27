@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 export default class NewAccount extends Component {
 
@@ -28,7 +29,8 @@ export default class NewAccount extends Component {
                         <div>
                             <button type="submit" class="btn">Open</button>
                             
-                            <button type="button" name="cancel" onclick="history.back()" class="cancel">Cancel</button>
+                            <Link to="/overview" className="cancel">Cancel</Link>
+                            {/* <button type="button" name="cancel" onclick="history.back()" class="cancel">Cancel</button> */}
                         </div>
                     </form>
                 </div>
