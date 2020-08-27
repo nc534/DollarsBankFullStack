@@ -16,14 +16,14 @@ export default class Login extends Component {
                     {/* <div class="error">{ this.state.errorMsg }</div>
                     <div class="message">{this.state.message}</div> */}
                     
-                    <form action=/*{this.handleLogin}*/"" method="post" class="form">
+                    <form action=/*{this.handleLogin}*/"" method="post" class="form-main">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" name="username" required placeholder="username" /*value={this.state.username} onChange={this.handleChange}*//>
+                            <input class="input" type="text" name="username" required placeholder="username" /*value={this.state.username} onChange={this.handleChange}*//>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" name="password" required placeholder="password" /*value={this.state.username} onChange={this.handleChange}*//>
+                            <input class="input" type="password" name="password" required placeholder="password" /*value={this.state.username} onChange={this.handleChange}*//>
                         </div>
                         <div>
                             <button type="submit" class="btn">Login</button>

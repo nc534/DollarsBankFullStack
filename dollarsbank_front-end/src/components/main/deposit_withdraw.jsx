@@ -30,7 +30,7 @@ export default class DepositWithdraw extends Component {
                             </select>
                         </div>
                         <div>
-                            <label for="transaction_amount">Amount</label>
+                            <label for="transaction_amount">Amount </label>
                             <input type="number" name="transaction_amount" required placeholder="0.00" min="0.00" step="0.01"/>
                         </div>
                         

@@ -8,7 +8,7 @@ import Transfer from './transfer';
 import Transactions from './transactions';
 import Customer from './customer';
 import Login from '../login/login';
-import './style.css'
+import './style.css';
 
 export default class Main extends Component {
 
