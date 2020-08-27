@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +22,11 @@ import com.dollarsbank.DollarsBankbackend.utility.TransactionUtility;
 @Entity
 @Table(name = "account")
 public class Account {
+	
+	public enum AccType {
+		CHECKING, SAVINGS
+	}
+	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column
@@ -28,6 +35,9 @@ public class Account {
 	private long custId;
 	@Column
 	private String accountName;
+	@Column
+	@Enumerated(EnumType.ORDINAL)
+	private AccType accType;
 	@Column
 	private long balance = 0;
 	@Column
@@ -59,11 +69,12 @@ public class Account {
 		transactions = new ArrayList<Transaction>();
 	}
 
-	public Account(long id, long custId, String accountName, long balance, List<Transaction> transactions) {
+	public Account(long id, long custId, String accountName, AccType accType, long balance, List<Transaction> transactions) {
 		super();
 		this.id = id;
 		this.custId = custId;
 		this.accountName = accountName;
+		this.accType = accType;
 		this.balance = balance;
 		this.transactions = transactions;
 	}
@@ -92,6 +103,14 @@ public class Account {
 		this.accountName = accountName;
 	}
 
+	public AccType getAccType() {
+		return accType;
+	}
+
+	public void setAccType(AccType accType) {
+		this.accType = accType;
+	}
+
 	public long getBalance() {
 		return balance;
 	}
@@ -108,8 +127,14 @@ public class Account {
 		this.transactions = transactions;
 	}
 	
-	// PRIVATE METHODS
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", custId=" + custId + ", accountName=" + accountName + ", accType=" + accType
+				+ ", balance=" + balance + ", transactions=" + transactions + "]";
+	}
 	
+	// PRIVATE METHODS
+
 	private void addTransaction(long amount, String msg, String date) {
 		if(transactions.size() == 5)
 			transactions.remove(0);
