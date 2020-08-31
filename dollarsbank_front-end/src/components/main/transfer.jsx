@@ -4,6 +4,13 @@ import { Link } from "react-router-dom";
 export default function Transfer() {
   const [destination, setDestination] = useState(null);
 
+  let today = new Date();
+  let date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  let time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  let dateTime = date + " " + time;
+
   return (
     <div className="customerMain">
       <div>
@@ -64,7 +71,12 @@ export default function Transfer() {
           <div>
             <p class="date">
               Date:{" "}
-              <input type="text" id="date" readonly placeholder=""></input>
+              <input
+                type="text"
+                id="date"
+                readOnly
+                placeholder={dateTime}
+              ></input>
             </p>
           </div>
 
