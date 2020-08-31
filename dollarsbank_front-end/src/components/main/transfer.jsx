@@ -32,23 +32,23 @@ export default class Transfer extends Component {
                             </select>
                         </div>
                         {/* State would be needed to hide or show option below */}
-                        {/* <div id="another">
-                            <label for="other_account">To Account Id:</label>
+                        <div id="another">
+                            <label for="other_account">To Account Id </label>
                             <input type="number" name="other_account" min="0" step="1" placeholder="account id"/>
-                            <label for="phone">Phone of Other Customer: </label>
+                            <p></p>
+                            <label for="phone">Phone of Other Customer </label>
                             <input type="text" name="phone" placeholder="phone"/>
-                        </div> */}
+                        </div>
                         <div>
                             <label for="transaction_amount">Amount </label>
                             <input type="number" name="transaction_amount" required placeholder="0.00" min="0.00" step="0.01"/>
                         </div>
                         <div>
-                            <p>Date: <input type="text" id="date" readonly placeholder=""></input></p>
+                            <p class="date">Date: <input type="text" id="date" readonly placeholder=""></input></p>
                         </div>
                         
                         <div>
                             <button type="submit" class="btn">Submit</button>
-                            
                             <Link to="/overview" className="cancel">Cancel</Link>
                             {/* <button type="button" name="cancel" class="cancel" onclick="history.back()">Cancel</button> */}
                         </div>

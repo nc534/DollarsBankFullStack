@@ -5,7 +5,7 @@ export default class Overview extends Component {
 
     render() {
         return(
-            <div>
+            <div className="customerMain">
                 <h3>Hello, </h3>
                 <div className='accountcontainer'>
                     <div className='balance'>
