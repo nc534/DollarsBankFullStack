@@ -26,7 +26,7 @@ public class TestCustomerController {
 			"The8th!!",
 			"Flinstone!",
 			"Rubble",
-			"TestPassword"
+			"TestPassword!"
 		};
 
 	@GetMapping(value = "/testCustDatabase")
