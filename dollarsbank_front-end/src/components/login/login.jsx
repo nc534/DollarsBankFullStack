@@ -18,6 +18,7 @@ export default function Login() {
       <div class="container">
         <div class="header">Login</div>
 
+        {/* TODO add conditional rendering */}
         {/* <div class="error">{ this.state.errorMsg }</div>
                     <div class="message">{this.state.message}</div> */}
 
