@@ -70,6 +70,14 @@ public class TestCustomerController {
 			System.out.println("Customer failed to be returned from the database");
 			return "Failure";
 		}
+		
+		System.out.println("Fetching Customer name using id");
+		String name = custRepo.selectNameFromCustomerById(loadedCust.getId());
+		if(!name.equals(loadedCust.getName())) {
+			System.out.println("Customer name does not match that acquire from custRepo.getNameFromId");
+			return "Failure";
+		}
+		
 		System.out.println("Success, deleting test data");
 		custRepo.deleteByUsernameAndPassword(inputUsername, truePassword);
 		return "Success";

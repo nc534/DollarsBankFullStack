@@ -1,5 +1,6 @@
 package com.dollarsbank.DollarsBankbackend.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,9 +136,9 @@ public class Account {
 	
 	// PRIVATE METHODS
 
-	private void addTransaction(long amount, String msg, String date) {
-		if(transactions.size() == 5)
-			transactions.remove(0);
+	private void addTransaction(long amount, String msg, LocalDateTime date) {
+//		if(transactions.size() == 5)
+//			transactions.remove(0);
 		transactions.add(new Transaction(amount, msg, date));
 	}
 }

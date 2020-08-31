@@ -1,5 +1,7 @@
 package com.dollarsbank.DollarsBankbackend.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Embeddable;
 
 import com.dollarsbank.DollarsBankbackend.utility.TransactionUtility;
@@ -9,9 +11,9 @@ public class Transaction {
 
 	public long amount;
 	public String message;
-	public String date;
+	public LocalDateTime date;
 	
-	public Transaction(long amount, String message, String date) {
+	public Transaction(long amount, String message, LocalDateTime date) {
 		super();
 		this.amount = amount;
 		this.message = message;
@@ -50,11 +52,11 @@ public class Transaction {
 		this.message = message;
 	}
 
-	public String getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 	

@@ -49,7 +49,7 @@ public class TransactionUtility {
 			return result;
 	}
 	
-	public static String getTime() {
-		return DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss").format(LocalDateTime.now());
+	public static LocalDateTime getTime() {
+		return LocalDateTime.now();
 	}
 }
