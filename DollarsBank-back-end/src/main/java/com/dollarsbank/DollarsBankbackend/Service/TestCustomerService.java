@@ -1,4 +1,4 @@
-/*package com.dollarsbank.DollarsBankbackend.Service;
+package com.dollarsbank.DollarsBankbackend.Service;
 
 import com.dollarsbank.DollarsBankbackend.dao.AccountRepository;
 import com.dollarsbank.DollarsBankbackend.dao.CustomerRepository;
@@ -15,7 +15,7 @@ public class TestCustomerService {
     @Autowired
     private CustomerRepository custRepo;
 
-    /************************* User Login ****************************
+    /************************* User Login ****************************/
     public boolean loginUser(String enteredString) {
         String removeBrackets = enteredString.substring(1, enteredString.length() - 1);
 
@@ -45,7 +45,7 @@ public class TestCustomerService {
 
     }
 
-    /******************************* Create User ******************************
+    /******************************* Create User ******************************/
 
     public String makeUser(String enteredString) {
         List<Customer> allUsers = new ArrayList<>();
@@ -54,23 +54,22 @@ public class TestCustomerService {
         String delim = "[,]";
         String[] onlyValues = enteredString.split(delim);
 
-        for(int i = 0; i < allUsers.size(); i++)
-            if(allUsers.get(i).getUsername().contentEquals(onlyValues[0])) {
-                return "Username already used!";
-            }
-        return delim;
-    }
-
-       Customer newCustomer = new Customer();
+        if(custRepo.existsByUsername(onlyValues[0])) {
+            System.out.println("User already exists");
+        }
+        Customer newCustomer = new Customer();
         newCustomer.setId(0);
         newCustomer.setUsername(onlyValues[0]);
         newCustomer.setPassword(onlyValues[1]);
         newCustomer.setName(onlyValues[2]);
         newCustomer.setAddress(onlyValues[3]);
-        newCustomer.setContactNumber(onlyvalues[4]);
+        newCustomer.setContactNumber(onlyValues[4]);
         custRepo.save(newCustomer);
         return "Added";
+    }
 
 
-}*/
+
+
+}
 
