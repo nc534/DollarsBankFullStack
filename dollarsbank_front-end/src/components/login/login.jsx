@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
+import * as Model from "../Model";
 
 export default function Login() {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
   function handleLogin(event) {
-    // TODO use the state vars to send a REST API request.
     event.preventDefault();
-    alert("Username " + username + "\nPassword: " + password);
+    const res = await Model.login({
+      username: username,
+      password: password,
+    });
+    // TODO login confirmation & redirect.
   }
 
   return (

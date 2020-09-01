@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import * as CONSTANTS from "../constants";
+import * as Model from "../Model";
 import axios from "axios";
 
 export default function Register() {
-  const url = CONSTANTS.API;
+  const url = Model.API;
 
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
@@ -17,7 +17,6 @@ export default function Register() {
 
   async function handleRegister(event) {
     event.preventDefault();
-    // TODO use the state vars to send a REST API request.
     const res = await axios.post(url + "/signup", {
       username: username,
       password: password,
@@ -27,7 +26,7 @@ export default function Register() {
       accountType: accountType,
       accountBalance: accountBalance,
     });
-    console.log(res);
+    // TODO use the response object to call Model.login().
   }
 
   return (
@@ -35,6 +34,7 @@ export default function Register() {
       <div class="container">
         <div class="header">Register</div>
 
+        {/* TODO error div? */}
         {/* <div class="error">{ this.state.errorMsg }</div>*/}
 
         <form onSubmit={handleRegister} class="form-main">
@@ -69,7 +69,7 @@ export default function Register() {
               type="text"
               name="name"
               required
-              placeholder="name" /*value={this.state.name} onChange={this.handleChange}*/
+              placeholder="name"
               onChange={(v) => setName(v.target.value)}
             />
           </div>
@@ -80,7 +80,7 @@ export default function Register() {
               type="text"
               name="address"
               required
-              placeholder="address" /*value={this.state.address} onChange={this.handleChange}*/
+              placeholder="address"
               onChange={(v) => setAddress(v.target.value)}
             />
           </div>
@@ -91,7 +91,7 @@ export default function Register() {
               type="text"
               name="phone"
               required
-              placeholder="phone" /*value={this.state.phone} onChange={this.handleChange}*/
+              placeholder="phone"
               onChange={(v) => setPhone(v.target.value)}
             />
           </div>
@@ -102,7 +102,7 @@ export default function Register() {
               type="text"
               name="username"
               required
-              placeholder="username" /*value={this.state.username} onChange={this.handleChange}*/
+              placeholder="username"
               onChange={(v) => setUsername(v.target.value)}
             />
           </div>
@@ -116,7 +116,6 @@ export default function Register() {
               placeholder="password"
               pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}"
               title="Must contain at least one number, one uppercase, one lowercase letter, and at least 8 or more characters"
-              /*value={this.state.password} onChange={this.handleChange}*/
               onChange={(v) => setPassword(v.target.value)}
             />
           </div>
