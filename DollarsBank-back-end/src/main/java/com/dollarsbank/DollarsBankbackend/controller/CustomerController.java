@@ -20,7 +20,7 @@ public class CustomerController {
     @Autowired
     private TestCustomerService CustomerService;
 
-    @PostMapping("/makeuser")
+    /*@PostMapping("/makeuser")
     public ResponseEntity<Customer> makeUser(@RequestBody Customer customer) throws Exception {
         Customer newCust = CustomerService.makeUser(customer);
         if(newCust == null) {
@@ -33,7 +33,7 @@ public class CustomerController {
         }
 
 
-    }
+    }*/
 
     @RequestMapping(method = RequestMethod.POST, value = "/login")
     public boolean loginClicked(@RequestBody String enteredString) throws Exception {
@@ -41,9 +41,9 @@ public class CustomerController {
         return CustomerService.loginUser(enteredString);
     }
 
-   /* @RequestMapping(method = RequestMethod.POST, value = "/signup")
+    @RequestMapping(method = RequestMethod.POST, value = "/signup")
     public String signup(@RequestBody String enteredString) throws Exception {
         System.out.println(enteredString);
         return CustomerService.makeUser(enteredString);
-    }*/
+    }
 }

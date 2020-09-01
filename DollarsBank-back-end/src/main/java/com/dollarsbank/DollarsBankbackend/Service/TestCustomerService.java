@@ -44,10 +44,9 @@ public class TestCustomerService {
 
     }
 
-    /******************************* Create User
-     * @param enteredString******************************/
+    /******************************* Create User ******************************/
 
-    public Customer makeUser(Customer enteredString) {
+    public String makeUser(String enteredString) {
         List<Customer> allUsers = new ArrayList<>();
         allUsers = (List<Customer>) custRepo.findAll();
         enteredString = enteredString.substring(1, enteredString.length()-1);
@@ -65,7 +64,7 @@ public class TestCustomerService {
         newCustomer.setAddress(onlyValues[3]);
         newCustomer.setContactNumber(onlyValues[4]);
         custRepo.save(newCustomer);
-        return newCustomer;
+        return "Added";
     }
 
 
