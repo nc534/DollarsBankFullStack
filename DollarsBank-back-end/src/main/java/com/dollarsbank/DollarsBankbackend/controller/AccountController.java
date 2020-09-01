@@ -11,7 +11,7 @@ public class AccountController {
     private TestAccountService AccountService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/addacct")
-    public @ResponseBody String addAcct(@ResponseBody String enteredString) throws Exception {
+    public @ResponseBody String addAcct(String enteredString) throws Exception {
         return AccountService.AcctAdd(enteredString);
     }
 }
