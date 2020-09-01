@@ -28,7 +28,7 @@ public class CustomerController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/signup")
-    public string signup(@RequestBody String enteredString) throws Exception {
+    public String signup(@RequestBody String enteredString) throws Exception {
         System.out.println(enteredString);
         return CustomerService.makeUser(enteredString);
     }
