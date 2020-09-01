@@ -1,6 +1,5 @@
 package com.dollarsbank.DollarsBankbackend.Service;
 
-import com.dollarsbank.DollarsBankbackend.dao.AccountRepository;
 import com.dollarsbank.DollarsBankbackend.dao.CustomerRepository;
 import com.dollarsbank.DollarsBankbackend.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +44,10 @@ public class TestCustomerService {
 
     }
 
-    /******************************* Create User ******************************/
+    /******************************* Create User
+     * @param enteredString******************************/
 
-    public String makeUser(String enteredString) {
+    public Customer makeUser(Customer enteredString) {
         List<Customer> allUsers = new ArrayList<>();
         allUsers = (List<Customer>) custRepo.findAll();
         enteredString = enteredString.substring(1, enteredString.length()-1);
@@ -65,7 +65,7 @@ public class TestCustomerService {
         newCustomer.setAddress(onlyValues[3]);
         newCustomer.setContactNumber(onlyValues[4]);
         custRepo.save(newCustomer);
-        return "Added";
+        return newCustomer;
     }
 
 
