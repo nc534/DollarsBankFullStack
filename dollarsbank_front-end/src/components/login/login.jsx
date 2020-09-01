@@ -7,7 +7,7 @@ export default function Login() {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
-  function handleLogin(event) {
+  async function handleLogin(event) {
     event.preventDefault();
     const res = await Model.login({
       username: username,
