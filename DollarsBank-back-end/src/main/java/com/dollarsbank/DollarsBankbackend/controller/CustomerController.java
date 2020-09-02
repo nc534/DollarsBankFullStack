@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.dollarsbank.DollarsBankbackend.Service.TestCustomerService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class CustomerController {
 
