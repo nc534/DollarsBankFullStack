@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import * as Model from "../Model";
+import * as Utils from "../Utils";
 import { GlobalContext } from "../Store";
 
 export default function Login() {
@@ -11,7 +11,7 @@ export default function Login() {
 
   async function handleLogin(event) {
     event.preventDefault();
-    const res = await Model.login({
+    const res = await Utils.login({
       username: username,
       password: password,
     });

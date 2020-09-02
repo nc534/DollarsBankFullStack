@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import * as Model from "../Model";
+import * as Utils from "../Utils";
 import { GlobalContext } from "../Store";
 
 export default function Register() {
@@ -17,7 +17,7 @@ export default function Register() {
 
   async function handleRegister(event) {
     event.preventDefault();
-    const res = await Model.register({
+    const res = await Utils.register({
       username: username,
       password: password,
       name: name,
