@@ -4,6 +4,8 @@
 
 ```js
 // App.js
+import { GlobalContext } from "./Store";
+
 export default function App() {
   return (
     <GlobalContext.Provider>
