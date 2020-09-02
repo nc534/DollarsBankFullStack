@@ -1,23 +1,29 @@
-import React, {Component} from 'react';
+import React, { useContext } from "react";
+import { GlobalContext } from "../Store";
 
-export default class Customer extends Component {
+export default function Customer() {
+  const { user } = useContext(GlobalContext);
 
-    render() {
-        return(
-            <div class="customerMain"> 
-                <div class="accountInfo">
-                <h3>Your Account Information</h3>
-                
-                <table>
-                    <tr><td>Name: </td></tr>
-                    <tr><td>Phone: </td></tr>
-                    <tr><td>Address: </td></tr>
-                    <tr><td>User Id: </td></tr>
-                </table>
+  return (
+    <div class="customerMain">
+      <div class="accountInfo">
+        <h3>Your Account Information</h3>
 
-                </div>
-            </div>
-            
-        )
-    }
+        <table>
+          <tr>
+            <td>Name: {user.name}</td>
+          </tr>
+          <tr>
+            <td>Phone: {user.phone}</td>
+          </tr>
+          <tr>
+            <td>Address: {user.address}</td>
+          </tr>
+          <tr>
+            <td>User Id: {user.username}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  );
 }
