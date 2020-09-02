@@ -1,5 +1,6 @@
 package com.dollarsbank.DollarsBankbackend.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,7 @@ public class Customer {
 	
 	private String name;
 	private String address;
+	@Column(name = "contact_number")
 	private String contactNumber;
 	
 	// NON-STANDARD PUBLIC METHODS

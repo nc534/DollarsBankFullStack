@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,7 +16,6 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-import com.dollarsbank.DollarsBankbackend.model.Transaction;
 import com.dollarsbank.DollarsBankbackend.utility.TransactionUtility;
 
 @Component
@@ -30,8 +30,11 @@ public class Account {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
+	@Column(name = "cust_id")
 	private long custId;
+	@Column(name = "account_name")
 	private String accountName;
+	@Column(name = "acc_type")
 	@Enumerated(EnumType.ORDINAL)
 	private AccType accType;
 	private long balance = 0;
