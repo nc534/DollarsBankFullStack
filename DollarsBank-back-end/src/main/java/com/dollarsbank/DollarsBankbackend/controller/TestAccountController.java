@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dollarsbank.DollarsBankbackend.dao.AccountRepository;
@@ -26,6 +27,8 @@ public class TestAccountController {
 															TestCustomerController.testPasswords[index]);
 		return custRepo.findByUsernameAndPassword(TestCustomerController.testUsernames[index], password);
 	}
+	
+	// FULL TEST
 	
 	@GetMapping(value = "/testAccDatabase")
 	public String testDatabase() {
@@ -73,6 +76,61 @@ public class TestAccountController {
 		accRepo.deleteById(account.getId());
 		return "Success";
 	}
+	
+	// SINGLE DATA
+	
+	@GetMapping(value = "/addAccTestData/{username}/{password}/{accName}")
+	public String addTestDataInput(@PathVariable(value="username") String username, @PathVariable(value="password") String password, @PathVariable(value="accName") String accName){
+		String truePassword = ValidationUtility.generatePassword(username, password);
+		Customer cust = custRepo.findByUsernameAndPassword(username, truePassword);
+		if(cust == null)
+			return "Invalid Credentials";
+		
+		if(accRepo.existsByCustIdAndAccountName(cust.getId(), accName))
+			return "Account already exists";
+		
+		Account acc = new Account();
+		acc.setAccountName(accName);
+		acc.setBalance(100);
+		acc.setAccType(Account.AccType.SAVINGS);
+		acc.setCustId(cust.getId());
+		accRepo.save(acc);
+		return "Success:<br>" + acc.toString();
+	}
+	
+	@GetMapping(value = "/showAccTestData/{username}/{password}/{accName}")
+	public String showTestDataInput(@PathVariable(value="username") String username, @PathVariable(value="password") String password, @PathVariable(value="accName") String accName){
+		String truePassword = ValidationUtility.generatePassword(username, password);
+		Customer cust = custRepo.findByUsernameAndPassword(username, truePassword);
+		if(cust == null)
+			return "Invalid Credentials";
+		
+		Account acc = accRepo.findByCustIdAndAccountName(cust.getId(), accName);
+		if(acc == null)
+			return "Account does not exist";
+		else
+			return acc.toString();
+	}
+	
+	@GetMapping(value = "/removeAccTestData/{username}/{password}/{accName}")
+	public String removeTestDataInput(@PathVariable(value="username") String username, @PathVariable(value="password") String password, @PathVariable(value="accName") String accName){
+		String truePassword = ValidationUtility.generatePassword(username, password);
+		Customer cust = custRepo.findByUsernameAndPassword(username, truePassword);
+		if(cust == null)
+			return "Invalid Credentials";
+		
+		if(!accRepo.existsByCustIdAndAccountName(cust.getId(), accName))
+			return "Account does not exist";
+		
+		Account acc = accRepo.findByCustIdAndAccountName(cust.getId(), accName);
+		accRepo.deleteByCustIdAndAccountName(cust.getId(), accName);
+		
+		if(accRepo.existsByCustIdAndAccountName(cust.getId(), accName))
+			return "Failed";
+		return "Success";
+	}
+	
+	// MULTI DATA
 	
 	@GetMapping(value = "/addAccTestData")
 	public String addTestData(){

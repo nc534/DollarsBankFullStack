@@ -2,6 +2,8 @@ package com.dollarsbank.DollarsBankbackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dollarsbank.DollarsBankbackend.dao.CustomerRepository;
@@ -22,12 +24,14 @@ public class TestCustomerController {
 		};
 		
 	public static final String[] testPasswords = {
-			"ShieldBash!",
+			"ShieldBash!0",
 			"The8th!!",
-			"Flinstone!",
-			"Rubble",
-			"TestPassword!"
+			"Flinstone!0",
+			"Rubble!0",
+			"TestPassword!0"
 		};
+	
+	// FULL TEST
 
 	@GetMapping(value = "/testCustDatabase")
 	public String testDatabase(){
@@ -82,6 +86,54 @@ public class TestCustomerController {
 		custRepo.deleteByUsernameAndPassword(inputUsername, truePassword);
 		return "Success";
 	}
+	
+	// SINGLE DATA
+	
+	@GetMapping(value = "/addCustTestData/{username}/{password}")
+	public String addTestDataInput(@PathVariable(value="username") String username, @PathVariable(value="password") String password){
+		if(!custRepo.existsByUsername(username)) {
+			String error = ValidationUtility.validPassword(password);
+			if(error != null)
+				return "Failed: " + error;
+			
+			Customer cust = new Customer();
+			cust.setName("Karrejahl Jigneison");
+			cust.setUsername(username);
+			cust.setNewPassword(password);
+			cust.setAddress("The Open Road");
+			cust.setContactNumber("9999999999");
+			custRepo.save(cust);
+			return "Success:<br>" + cust.toString();
+		}
+		else
+			return "Failed: Username in use";
+	}
+	
+	@GetMapping(value = "/showCustTestData/{username}/{password}")
+	public String showTestDataInput(@PathVariable(value="username") String username, @PathVariable(value="password") String password){
+		
+		String truePassword = ValidationUtility.generatePassword(username, password);
+		Customer cust = custRepo.findByUsernameAndPassword(username, truePassword);
+		if(cust != null)
+			return cust.toString();
+		else
+			return "User doesn't exist";
+	}
+	
+	@GetMapping(value = "/removeCustTestData/{username}/{password}")
+	public String removeTestDataInput(@PathVariable(value="username") String username, @PathVariable(value="password") String password){
+		if(custRepo.existsByUsername(username)) {
+			String truePassword = ValidationUtility.generatePassword(username, password);
+			custRepo.deleteByUsernameAndPassword(username, truePassword);
+			if(custRepo.existsByUsername(username))
+				return "Invalid Credentials";
+		}
+		else
+			return "User doesn't exist";
+		return "Success";
+	}
+	
+	// MULTI DATA
 	
 	@GetMapping(value = "/addCustTestData")
 	public String addTestData(){

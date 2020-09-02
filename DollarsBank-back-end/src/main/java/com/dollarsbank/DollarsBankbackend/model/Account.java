@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -30,18 +29,12 @@ public class Account {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	@Column
 	private long id;
-	@Column
 	private long custId;
-	@Column
 	private String accountName;
-	@Column
 	@Enumerated(EnumType.ORDINAL)
 	private AccType accType;
-	@Column
 	private long balance = 0;
-	@Column
 	@ElementCollection(targetClass=Transaction.class)
 	private List<Transaction> transactions;
 	
