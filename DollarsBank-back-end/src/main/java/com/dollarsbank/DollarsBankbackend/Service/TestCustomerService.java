@@ -1,6 +1,5 @@
 package com.dollarsbank.DollarsBankbackend.Service;
 
-import com.dollarsbank.DollarsBankbackend.dao.AccountRepository;
 import com.dollarsbank.DollarsBankbackend.dao.CustomerRepository;
 import com.dollarsbank.DollarsBankbackend.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +44,8 @@ public class TestCustomerService {
 
     }
 
+    /******************************* Create User ******************************/
 
-/***** Create User
     public String makeUser(String enteredString) {
         List<Customer> allUsers = new ArrayList<>();
         allUsers = (List<Customer>) custRepo.findAll();
@@ -54,22 +53,22 @@ public class TestCustomerService {
         String delim = "[,]";
         String[] onlyValues = enteredString.split(delim);
 
-        for(int i = 0; i < allUsers.size(); i++)
-            if(allUsers.get(i).getUsername().contentEquals(onlyValues[0])) {
-                return "Username already used!";
-            }
+        if(custRepo.existsByUsername(onlyValues[0])) {
+            System.out.println("User already exists");
         }
-
         Customer newCustomer = new Customer();
         newCustomer.setId(0);
         newCustomer.setUsername(onlyValues[0]);
         newCustomer.setPassword(onlyValues[1]);
         newCustomer.setName(onlyValues[2]);
         newCustomer.setAddress(onlyValues[3]);
-        newCustomer.setContactNumber(onlyvalues[4]);
+        newCustomer.setContactNumber(onlyValues[4]);
         custRepo.save(newCustomer);
         return "Added";
+    }
 
 
-} */
+
+
 }
+

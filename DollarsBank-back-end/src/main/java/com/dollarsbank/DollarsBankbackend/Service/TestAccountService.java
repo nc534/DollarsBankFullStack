@@ -35,8 +35,7 @@ public class TestAccountService {
         String[] parsedData = mySubstr.split(delim);
         ArrayList<String> onlyValues = new ArrayList<>();
 
-        // Loop through the String array of the values in the format -> make=Dodge,
-        // model=Ram
+
         // split on the equal sign, and take everything after the equal sign all the way
         // to the end
         // of that specific entry so make=Dodge just becomes Dodge. Then push that value
