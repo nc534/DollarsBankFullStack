@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Login from "../components/login/login";
-import Register from "../components/login/register";
-import Main from "../components/main/main";
+import Login from "./login/login";
+import Register from "./login/register";
+import Main from "./main/main";
 import { GlobalContext } from "./Store";
 
 export default function App() {
