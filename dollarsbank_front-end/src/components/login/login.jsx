@@ -2,20 +2,24 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import * as Utils from "../Utils";
-import { GlobalContext } from "../Store";
+import { AppContext } from "../App";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
-  const context = useContext(GlobalContext);
+  const history = useHistory();
+  const state = useContext(AppContext);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
   async function handleLogin(event) {
     event.preventDefault();
-    const res = await Utils.login({
+    const loginResult = await Utils.login({
       username: username,
       password: password,
     });
-    // TODO login confirmation & redirect. Use [context.user] in this instance.
+    // TODO login confirmation.
+    state.setUser(loginResult);
+    history.push("/main");
   }
 
   return (

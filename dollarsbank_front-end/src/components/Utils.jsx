@@ -10,8 +10,8 @@ export async function register(user) {
 
 export async function login(user) {
   // TODO logic for updating the global application state upon successful login.
-  console.log(user);
-  return user;
+  const res = await axios.post(API + "/login", user);
+  return res.data;
 }
 
 export function logout() {
