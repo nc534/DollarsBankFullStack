@@ -2,10 +2,10 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import * as Utils from "../Utils";
-import { GlobalContext } from "../Store";
+// import { GlobalContext } from "../Store";
 
 export default function Register() {
-  const context = useContext(GlobalContext);
+  // const context = useContext(GlobalContext);
 
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
