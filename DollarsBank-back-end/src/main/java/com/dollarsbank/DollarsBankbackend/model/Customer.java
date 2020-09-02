@@ -7,11 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-
 import com.dollarsbank.DollarsBankbackend.utility.ValidationUtility;
-
-@Component
 @Entity
 @Table(name = "customer")
 public class Customer {
@@ -20,7 +16,6 @@ public class Customer {
 	private long id;
 	private String username;
 	private String password;
-	
 	private String name;
 	private String address;
 	@Column(name = "contact_number")
@@ -38,9 +33,8 @@ public class Customer {
 	
 	// STANDARD PUBLIC METHODS
 	
-	public Customer(long id, String username, String password, String name, String address, String contactNumber) {
+	public Customer(String username, String password, String name, String address, String contactNumber) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.name = name;
@@ -54,10 +48,6 @@ public class Customer {
 
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getUsername() {
