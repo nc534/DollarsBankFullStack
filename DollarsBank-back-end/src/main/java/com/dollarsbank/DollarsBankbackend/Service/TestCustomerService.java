@@ -47,24 +47,28 @@ public class TestCustomerService {
     /******************************* Create User ******************************/
 
     public String makeUser(String enteredString) {
-        List<Customer> allUsers = new ArrayList<>();
-        allUsers = (List<Customer>) custRepo.findAll();
         enteredString = enteredString.substring(1, enteredString.length()-1);
-        String delim = "[,]";
+        String delim = "/n";
         String[] onlyValues = enteredString.split(delim);
 
-        if(custRepo.existsByUsername(onlyValues[0])) {
-            System.out.println("User already exists");
-        }
         Customer newCustomer = new Customer();
-        newCustomer.setId(0);
-        newCustomer.setUsername(onlyValues[0]);
-        newCustomer.setPassword(onlyValues[1]);
-        newCustomer.setName(onlyValues[2]);
-        newCustomer.setAddress(onlyValues[3]);
-        newCustomer.setContactNumber(onlyValues[4]);
-        custRepo.save(newCustomer);
-        return "Added";
+        int numAdded = 0;
+
+        for(int i = 0; i < onlyValues.length; ++i) {
+            if(!custRepo.existsByUsername(onlyValues[0])) {
+                newCustomer.setId(0);
+                newCustomer.setUsername(onlyValues[0]);
+                newCustomer.setNewPassword(onlyValues[1]);
+                newCustomer.setName(onlyValues[2]);
+                newCustomer.setAddress(onlyValues[3]);
+                newCustomer.setContactNumber(onlyValues[4]);
+                custRepo.save(newCustomer);
+                if(newCustomer != null){
+                    ++numAdded;
+                }
+            }
+        }
+        return numAdded + "test accounts have been added";
     }
 
 
