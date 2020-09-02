@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import * as Model from "../Model";
-import axios from "axios";
+import { GlobalContext } from "../Store";
 
 export default function Register() {
-  const url = Model.API;
+  const context = useContext(GlobalContext);
 
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
@@ -17,7 +17,7 @@ export default function Register() {
 
   async function handleRegister(event) {
     event.preventDefault();
-    const res = await axios.post(url + "/signup", {
+    const res = await Model.register({
       username: username,
       password: password,
       name: name,
@@ -26,7 +26,7 @@ export default function Register() {
       accountType: accountType,
       accountBalance: accountBalance,
     });
-    // TODO use the response object to call Model.login().
+    // TODO set [context.user] to the registered user and forward to Model.login.
   }
 
   return (

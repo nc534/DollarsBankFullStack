@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import * as Model from "../Model";
+import { GlobalContext } from "../Store";
 
 export default function Login() {
+  const context = useContext(GlobalContext);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
@@ -13,7 +15,7 @@ export default function Login() {
       username: username,
       password: password,
     });
-    // TODO login confirmation & redirect.
+    // TODO login confirmation & redirect. Use [context.user] in this instance.
   }
 
   return (
