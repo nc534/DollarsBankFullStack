@@ -21,12 +21,14 @@ public class ValidationUtility {
 			return "Less Than 8 Characters";
 		
 		// check for required characters
-		boolean lower = false, upper = false, special = false;
+		boolean lower = false, upper = false, special = false, number = false;
 		for(int i = password.length() - 1; i >= 0; --i) {
 			if((password.charAt(i) >= 'a') && (password.charAt(i) <= 'z'))
 				lower = true;
 			else if((password.charAt(i) >= 'A') && (password.charAt(i) <= 'Z'))
 				upper = true;
+			else if((password.charAt(i) >= '0') && (password.charAt(i) <= '9'))
+				number = true;
 			else
 				special = true;
 		}
@@ -35,6 +37,8 @@ public class ValidationUtility {
 			return "No Lowercase Characters";
 		else if(!upper)
 			return "No Uppercase Characters";
+		else if(!number)
+			return "No Number Characters";
 		else if(!special)
 			return "No Special Characters";
 		else

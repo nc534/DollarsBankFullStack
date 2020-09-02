@@ -16,7 +16,6 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-import com.dollarsbank.DollarsBankbackend.model.Transaction;
 import com.dollarsbank.DollarsBankbackend.utility.TransactionUtility;
 
 @Component
@@ -30,18 +29,15 @@ public class Account {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	@Column
 	private long id;
-	@Column
+	@Column(name = "cust_id")
 	private long custId;
-	@Column
+	@Column(name = "account_name")
 	private String accountName;
-	@Column
+	@Column(name = "acc_type")
 	@Enumerated(EnumType.ORDINAL)
 	private AccType accType;
-	@Column
 	private long balance = 0;
-	@Column
 	@ElementCollection(targetClass=Transaction.class)
 	private List<Transaction> transactions;
 	

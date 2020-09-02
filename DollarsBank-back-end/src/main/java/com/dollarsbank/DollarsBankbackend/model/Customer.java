@@ -17,18 +17,13 @@ import com.dollarsbank.DollarsBankbackend.utility.ValidationUtility;
 public class Customer {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	@Column
 	private long id;
-	@Column
 	private String username;
-	@Column
 	private String password;
 	
-	@Column
 	private String name;
-	@Column
 	private String address;
-	@Column
+	@Column(name = "contact_number")
 	private String contactNumber;
 	
 	// NON-STANDARD PUBLIC METHODS
