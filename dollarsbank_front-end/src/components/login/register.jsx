@@ -33,7 +33,7 @@ export default function Register() {
       changeMsg();
     } else {
       state.setUser(res);
-      history.push("/main");
+      history.push("/login");
     }
   }
 
