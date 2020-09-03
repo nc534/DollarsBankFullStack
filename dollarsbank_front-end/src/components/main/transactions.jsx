@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 
 export default class Transactions extends Component {
+  
+  // TODO fetch latest transaction when accessing this component
 
     render() {
 
