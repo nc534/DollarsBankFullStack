@@ -6,10 +6,10 @@ export default function Transfer() {
 
   let today = new Date();
   let date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-  let time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  let dateTime = date + " " + time;
+    today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
+  // let time =
+  //   today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  // let dateTime = date + " " + time;
 
   return (
     <div className="customerMain">
@@ -71,12 +71,7 @@ export default function Transfer() {
           <div>
             <p className="date">
               Date:{" "}
-              <input
-                type="text"
-                id="date"
-                readOnly
-                placeholder={dateTime}
-              ></input>
+              <input type="text" id="date" readOnly placeholder={date}></input>
             </p>
           </div>
 
