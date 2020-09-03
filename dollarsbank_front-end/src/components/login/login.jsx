@@ -1,9 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./style.css";
 import * as Utils from "../Utils";
 import { AppContext } from "../App";
-import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const history = useHistory();
