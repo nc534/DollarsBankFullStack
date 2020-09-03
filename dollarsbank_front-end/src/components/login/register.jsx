@@ -37,11 +37,12 @@ export default function Register() {
         {/* TODO error div? */}
         {/* <div class="error">{ this.state.errorMsg }</div>*/}
 
-        <form onSubmit={handleRegister} class="form-main">
+        <form onSubmit={handleRegister} className="form-main">
           <div className="form-group">
             <label htmlFor="account">Account </label>
             <select
-              nameName="account"
+              className="input"
+              name="account"
               onChange={(v) => setAccountType(v.target.value)}
             >
               <option value="">--Please choose an option--</option>

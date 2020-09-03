@@ -10,18 +10,20 @@ export default function Customer() {
         <h3>Your Account Information</h3>
 
         <table>
-          <tr>
-            <td>Name: {state.user.name}</td>
-          </tr>
-          <tr>
-            <td>Phone: {state.user.contactNumber}</td>
-          </tr>
-          <tr>
-            <td>Address: {state.user.address}</td>
-          </tr>
-          <tr>
-            <td>User Id: {state.user.username}</td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>Name: {state.user.name}</td>
+            </tr>
+            <tr>
+              <td>Phone: {state.user.contactNumber}</td>
+            </tr>
+            <tr>
+              <td>Address: {state.user.address}</td>
+            </tr>
+            <tr>
+              <td>User Id: {state.user.username}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
