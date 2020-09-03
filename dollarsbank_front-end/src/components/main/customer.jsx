@@ -1,23 +1,29 @@
-import React, {Component} from 'react';
+import React, { useContext } from "react";
+import { AppContext } from "../App";
 
-export default class Customer extends Component {
+export default function Customer() {
+  const state = useContext(AppContext);
+  
+  return (
+    <div className="customerMain">
+      <div className="accountInfo">
+        <h3>Your Account Information</h3>
 
-    render() {
-        return(
-            <div class="customerMain"> 
-                <div class="accountInfo">
-                <h3>Your Account Information</h3>
-                
-                <table>
-                    <tr><td>Name: </td></tr>
-                    <tr><td>Phone: </td></tr>
-                    <tr><td>Address: </td></tr>
-                    <tr><td>User Id: </td></tr>
-                </table>
-
-                </div>
-            </div>
-            
-        )
-    }
+        <table>
+          <tr>
+            <td>Name: {state.user.name}</td>
+          </tr>
+          <tr>
+            <td>Phone: {state.user.contactNumber}</td>
+          </tr>
+          <tr>
+            <td>Address: {state.user.address}</td>
+          </tr>
+          <tr>
+            <td>User Id: {state.user.username}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  );
 }

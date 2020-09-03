@@ -1,19 +1,12 @@
 package com.dollarsbank.DollarsBankbackend.controller;
 
-import java.net.URI;
-import java.util.ArrayList;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-
 import com.dollarsbank.DollarsBankbackend.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.dollarsbank.DollarsBankbackend.Service.TestCustomerService;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class CustomerController {
 
@@ -36,14 +29,12 @@ public class CustomerController {
     }*/
 
     @RequestMapping(method = RequestMethod.POST, value = "/login")
-    public boolean loginClicked(@RequestBody String enteredString) throws Exception {
-        System.out.println(enteredString);
-        return CustomerService.loginUser(enteredString);
+    public Customer loginClicked(@RequestBody Customer customer){
+        return CustomerService.loginUser(customer);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/signup")
-    public String signup(@RequestBody String enteredString) throws Exception {
-        System.out.println(enteredString);
-        return CustomerService.makeUser(enteredString);
+    public Customer signup(@RequestBody Customer customer){
+        return CustomerService.makeUser(customer);
     }
 }
