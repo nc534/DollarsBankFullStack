@@ -12,10 +12,10 @@ export default class DepositWithdraw extends Component {
                             
                     {/* <div class="error">{ this.state.errorMsg }</div> */}
                             
-                    <form action="" method="post" class="form">
+                    <form action="" method="post" className="form">
                     
                         <div>
-                            <label for="transaction">Transaction Type </label>
+                            <label htmlFor="transaction">Transaction Type </label>
                             <select name="transaction">
                                 <option value="">--Please choose an option--</option>
                                 <option value="deposit">Deposit</option>
@@ -23,7 +23,7 @@ export default class DepositWithdraw extends Component {
                             </select>
                         </div>
                         <div>
-                            <label for="account">Account </label>
+                            <label htmlFor="account">Account </label>
                             <select name="account">
                                 <option value="">--Please choose an option--</option>
                                 <option value="savings">Savings</option>
@@ -31,12 +31,12 @@ export default class DepositWithdraw extends Component {
                             </select>
                         </div>
                         <div>
-                            <label for="transaction_amount">Amount </label>
+                            <label htmlFor="transaction_amount">Amount </label>
                             <input type="number" name="transaction_amount" required placeholder="0.00" min="0.00" step="0.01"/>
                         </div>
                         
                         <div>
-                            <button type="submit" class="btn">Submit</button>
+                            <button type="submit" className="btn">Submit</button>
                             
                             <Link to="/overview" className="cancel">Cancel</Link>
                             {/* <button type="button" name="cancel" class="cancel" onclick="history.back()">Cancel</button> */}

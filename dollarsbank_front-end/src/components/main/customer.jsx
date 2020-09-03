@@ -1,26 +1,26 @@
 import React, { useContext } from "react";
-import { GlobalContext } from "../Store";
+import { AppContext } from "../App";
 
 export default function Customer() {
-  const { user } = useContext(GlobalContext);
-
+  const state = useContext(AppContext);
+  
   return (
-    <div class="customerMain">
-      <div class="accountInfo">
+    <div className="customerMain">
+      <div className="accountInfo">
         <h3>Your Account Information</h3>
 
         <table>
           <tr>
-            <td>Name: {user.name}</td>
+            <td>Name: {state.user.name}</td>
           </tr>
           <tr>
-            <td>Phone: {user.phone}</td>
+            <td>Phone: {state.user.contactNumber}</td>
           </tr>
           <tr>
-            <td>Address: {user.address}</td>
+            <td>Address: {state.user.address}</td>
           </tr>
           <tr>
-            <td>User Id: {user.username}</td>
+            <td>User Id: {state.user.username}</td>
           </tr>
         </table>
       </div>

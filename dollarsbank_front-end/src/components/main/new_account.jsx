@@ -11,10 +11,10 @@ export default class NewAccount extends Component {
                             
                     {/* <div class="error">{ this.state.errorMsg }</div>*/}
                             
-                    <form action="" method="post" class="form">
+                    <form action="" method="post" className="form">
                     
                         <div>
-                            <label for="account">Account </label>
+                            <label htmlFor="account">Account </label>
                             <select name="account">
                                 <option value="">--Please choose an option--</option>
                                 <option value="savings">Savings</option>
@@ -22,12 +22,12 @@ export default class NewAccount extends Component {
                             </select>
                         </div>
                         <div>
-                            <label for="initial_deposit">Amount </label>
+                            <label htmlFor="initial_deposit">Amount </label>
                             <input type="number" name="initial_deposit" required placeholder="0.00" min="0.00" step="0.01"/>
                         </div>
                         
                         <div>
-                            <button type="submit" class="btn">Open</button>
+                            <button type="submit" className="btn">Open</button>
                             
                             <Link to="/overview" className="cancel">Cancel</Link>
                             {/* <button type="button" name="cancel" onclick="history.back()" class="cancel">Cancel</button> */}

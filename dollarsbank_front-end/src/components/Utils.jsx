@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // ! URL endpoint for database server
-export const API = "http://localhost:8080";
+const API = "http://localhost:8080";
 
 export async function register(user) {
   const res = await axios.post(API + "/signup", user);
@@ -10,8 +10,8 @@ export async function register(user) {
 
 export async function login(user) {
   // TODO logic for updating the global application state upon successful login.
-  console.log(user);
-  return user;
+  const res = await axios.post(API + "/login", user);
+  return res.data;
 }
 
 export function logout() {

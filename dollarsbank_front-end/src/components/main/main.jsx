@@ -11,23 +11,23 @@ import Login from "../login/login";
 import "./style.css";
 
 export default function Main() {
-  return (
-    <div className="customerMain">
-      <Router>
-        <Header />
+    return (
+        <div className="customerMain">
+        <Router>
+            <Header />
 
-        <Switch>
-          {/* Default page */}
-          <Route exact path="/main" component={Overview} />
-          <Route exact path="/overview" component={Overview} />
-          <Route exact path="/new-account" component={NewAccount} />
-          <Route exact path="/transaction" component={DepositWithdraw} />
-          <Route exact path="/transfer" component={Transfer} />
-          <Route exact path="/transactions" component={Transactions} />
-          <Route exact path="/accountinfo" component={Customer} />
-          <Route exact path="/login" component={Login} />
-        </Switch>
-      </Router>
-    </div>
-  );
+            <Switch>
+            {/* Default page */}
+            <Route exact path="/main" component={Overview} />
+            <Route exact path="/overview" component={Overview} />
+            <Route exact path="/new-account" component={NewAccount} />
+            <Route exact path="/transaction" component={DepositWithdraw} />
+            <Route exact path="/transfer" component={Transfer} />
+            <Route exact path="/transactions" component={Transactions} />
+            <Route exact path="/accountinfo" component={Customer} />
+            <Route exact path="/login" component={Login} />
+            </Switch>
+        </Router>
+        </div>
+    );
 }
