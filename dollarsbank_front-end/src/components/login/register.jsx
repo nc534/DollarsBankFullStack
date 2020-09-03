@@ -15,6 +15,7 @@ export default function Register() {
   const [phone, setPhone] = useState(null);
   const [accountType, setAccountType] = useState(null);
   const [accountBalance, setAccountBalance] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   async function handleRegister(event) {
     event.preventDefault();
@@ -29,11 +30,15 @@ export default function Register() {
     });
     if (!res) {
       // TODO fancier alert.
-      alert("Username taken. Please try again.");
+      changeMsg();
     } else {
       state.setUser(res);
       history.push("/main");
     }
+  }
+
+  function changeMsg() {
+    setErrorMsg("Username taken. Please try again.");
   }
 
   return (
@@ -42,7 +47,7 @@ export default function Register() {
         <div className="header">Register</div>
 
         {/* TODO error div? */}
-        {/* <div class="error">{ this.state.errorMsg }</div>*/}
+        <div class="error">{ errorMsg }</div>
 
         <form onSubmit={handleRegister} className="form-main">
           <div className="form-group">
