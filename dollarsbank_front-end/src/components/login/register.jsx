@@ -28,6 +28,7 @@ export default function Register() {
       // accountBalance: accountBalance,
     });
     if (!res) {
+      // TODO fancier alert.
       alert("Username taken. Please try again.");
     } else {
       state.setUser(res);
