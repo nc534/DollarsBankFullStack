@@ -14,7 +14,7 @@ export default function Customer() {
             <td>Name: {state.user.name}</td>
           </tr>
           <tr>
-            <td>Phone: {state.user.phone}</td>
+            <td>Phone: {state.user.contactNumber}</td>
           </tr>
           <tr>
             <td>Address: {state.user.address}</td>
