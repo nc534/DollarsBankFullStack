@@ -30,18 +30,18 @@ export default function Register() {
   }
 
   return (
-    <div class="main">
-      <div class="container">
-        <div class="header">Register</div>
+    <div className="main">
+      <div className="container">
+        <div className="header">Register</div>
 
         {/* TODO error div? */}
         {/* <div class="error">{ this.state.errorMsg }</div>*/}
 
         <form onSubmit={handleRegister} class="form-main">
-          <div class="form-group">
-            <label for="account">Account </label>
+          <div className="form-group">
+            <label htmlFor="account">Account </label>
             <select
-              name="account"
+              nameName="account"
               onChange={(v) => setAccountType(v.target.value)}
             >
               <option value="">--Please choose an option--</option>
@@ -49,10 +49,10 @@ export default function Register() {
               <option value="checking">Checking</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="initial_deposit">Amount</label>
+          <div className="form-group">
+            <label htmlFor="initial_deposit">Amount</label>
             <input
-              class="input"
+              className="input"
               type="number"
               name="initial_deposit"
               required
@@ -62,10 +62,10 @@ export default function Register() {
               onChange={(v) => setAccountBalance(v.target.value)}
             />
           </div>
-          <div class="form-group">
-            <label for="name">Name</label>
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
             <input
-              class="input"
+              className="input"
               type="text"
               name="name"
               required
@@ -73,10 +73,10 @@ export default function Register() {
               onChange={(v) => setName(v.target.value)}
             />
           </div>
-          <div class="form-group">
-            <label for="address">Address</label>
+          <div className="form-group">
+            <label htmlFor="address">Address</label>
             <input
-              class="input"
+              className="input"
               type="text"
               name="address"
               required
@@ -84,10 +84,10 @@ export default function Register() {
               onChange={(v) => setAddress(v.target.value)}
             />
           </div>
-          <div class="form-group">
-            <label for="phone">Phone</label>
+          <div className="form-group">
+            <label htmlFor="phone">Phone</label>
             <input
-              class="input"
+              className="input"
               type="text"
               name="phone"
               required
@@ -95,10 +95,10 @@ export default function Register() {
               onChange={(v) => setPhone(v.target.value)}
             />
           </div>
-          <div class="form-group">
-            <label for="username">Username</label>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
             <input
-              class="input"
+              className="input"
               type="text"
               name="username"
               required
@@ -106,10 +106,10 @@ export default function Register() {
               onChange={(v) => setUsername(v.target.value)}
             />
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
             <input
-              class="input"
+              className="input"
               type="password"
               name="password"
               required
@@ -119,7 +119,7 @@ export default function Register() {
               onChange={(v) => setPassword(v.target.value)}
             />
           </div>
-          <button type="submit" class="btn">
+          <button type="submit" className="btn">
             Register
           </button>
           <div>

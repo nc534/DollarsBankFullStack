@@ -15,7 +15,7 @@ export default class Overview extends Component {
                     </div>
                 </div>
 
-                <div class='accountcontainer'>
+                <div className='accountcontainer'>
                     <Link to='/new-account' className='link'>OPEN NEW ACCOUNT</Link>
 			    </div>
             </div>
