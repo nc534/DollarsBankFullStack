@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Transfer() {
-  const [destination, setDestination] = useState(null);
+  const [destination, setDestination] = useState(undefined);
 
   let today = new Date();
   let date =
