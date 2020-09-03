@@ -4,10 +4,6 @@ import com.dollarsbank.DollarsBankbackend.dao.CustomerRepository;
 import com.dollarsbank.DollarsBankbackend.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class TestCustomerService {
@@ -23,8 +19,6 @@ public class TestCustomerService {
     /******************************* Create User ******************************/
 
     public Customer makeUser(Customer customer) {
-        List<Customer> allUsers = new ArrayList<>();
-        allUsers = (List<Customer>) custRepo.findAll();
 
         Customer newCustomer = new Customer();
 
