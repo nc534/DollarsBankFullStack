@@ -23,20 +23,20 @@ export default function Login() {
   }
 
   return (
-    <div class="main">
+    <div className="main">
       <h1>DOLLARSBANK Welcomes You!!</h1>
-      <div class="container">
-        <div class="header">Login</div>
+      <div className="container">
+        <div className="header">Login</div>
 
         {/* TODO add conditional rendering for login error messages */}
         {/* <div class="error">{ this.state.errorMsg }</div>
                     <div class="message">{this.state.message}</div> */}
 
-        <form onSubmit={handleLogin} class="form-main">
-          <div class="form-group">
-            <label for="username">Username</label>
+        <form onSubmit={handleLogin} className="form-main">
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
             <input
-              class="input"
+              className="input"
               type="text"
               name="username"
               required
@@ -44,10 +44,10 @@ export default function Login() {
               onChange={(v) => setUsername(v.target.value)}
             />
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
             <input
-              class="input"
+              className="input"
               type="password"
               name="password"
               required
@@ -56,7 +56,7 @@ export default function Login() {
             />
           </div>
           <div>
-            <button type="submit" class="btn">
+            <button type="submit" className="btn">
               Login
             </button>
           </div>

@@ -18,9 +18,9 @@ export default function Transfer() {
 
         {/* <div class="error">{ this.state.errorMsg }</div> */}
 
-        <form action="" method="post" class="form">
+        <form action="" method="post" className="form">
           <div>
-            <label for="account_from">Transfer From </label>
+            <label htmlFor="account_from">Transfer From </label>
             <select name="account_from">
               <option value="">--Please choose an option--</option>
               <option value="savings">Savings</option>
@@ -28,7 +28,7 @@ export default function Transfer() {
             </select>
           </div>
           <div>
-            <label for="account_to">Transfer To </label>
+            <label htmlFor="account_to">Transfer To </label>
             <select
               id="selection"
               name="account_to"
@@ -53,12 +53,12 @@ export default function Transfer() {
                 placeholder="account id"
               />
               <p></p>
-              <label for="phone">Phone of Other Customer </label>
+              <label htmlFor="phone">Phone of Other Customer </label>
               <input type="text" name="phone" placeholder="phone" />
             </div>
           )}
           <div>
-            <label for="transaction_amount">Amount </label>
+            <label htmlFor="transaction_amount">Amount </label>
             <input
               type="number"
               name="transaction_amount"
@@ -69,14 +69,14 @@ export default function Transfer() {
             />
           </div>
           <div>
-            <p class="date">
+            <p className="date">
               Date:{" "}
               <input type="text" id="date" readOnly placeholder={date}></input>
             </p>
           </div>
 
           <div>
-            <button type="submit" class="btn">
+            <button type="submit" className="btn">
               Submit
             </button>
             <Link to="/overview" className="cancel">

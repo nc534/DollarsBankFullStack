@@ -5,8 +5,8 @@ export default function Customer() {
   const state = useContext(AppContext);
   
   return (
-    <div class="customerMain">
-      <div class="accountInfo">
+    <div className="customerMain">
+      <div className="accountInfo">
         <h3>Your Account Information</h3>
 
         <table>
