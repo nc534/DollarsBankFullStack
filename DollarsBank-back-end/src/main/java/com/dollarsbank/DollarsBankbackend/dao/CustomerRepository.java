@@ -11,6 +11,7 @@ import com.dollarsbank.DollarsBankbackend.model.Customer;
 public interface CustomerRepository extends CrudRepository<Customer, String>{
 
 	boolean existsByUsername(String username);
+	boolean existsByUsernameAndPassword(String username, String password);
 	Customer findByUsernameAndPassword(String username, String password);
 	
 	@Transactional

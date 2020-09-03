@@ -36,9 +36,9 @@ public class CustomerController {
     }*/
 
     @RequestMapping(method = RequestMethod.POST, value = "/login")
-    public boolean loginClicked(@RequestBody String enteredString) throws Exception {
-        System.out.println(enteredString);
-        return CustomerService.loginUser(enteredString);
+    public boolean loginClicked(@RequestParam String username, @RequestParam String password) throws Exception {
+        System.out.println(username + ":" + password);
+        return CustomerService.loginUser(username, password);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/signup")

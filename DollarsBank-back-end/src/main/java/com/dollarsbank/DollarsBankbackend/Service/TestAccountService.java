@@ -3,6 +3,7 @@ package com.dollarsbank.DollarsBankbackend.Service;
 import com.dollarsbank.DollarsBankbackend.dao.AccountRepository;
 import com.dollarsbank.DollarsBankbackend.dao.CustomerRepository;
 import com.dollarsbank.DollarsBankbackend.model.Account;
+import com.dollarsbank.DollarsBankbackend.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,14 +52,19 @@ public class TestAccountService {
     public String AcctAdd(String enteredString) {
         ArrayList<String> onlyValues = extracted(enteredString);
 
+
         Account newAcct = new Account();
-
-        newAcct.setId(0);
-        newAcct.setCustId(1);
-        newAcct.setAccountName(onlyValues.get(2));
-
-        accRepo.save(newAcct);
-
+        Customer customer = new Customer();
+//
+//
+//        int numAdded = 0;
+//
+//        if(customer == null) {
+//            return "invalid Credentials";
+//
+//        }
+//
+//        if(accRepo.existsByCustIdAndAccountName(cust))
         return "Added!";
 
 

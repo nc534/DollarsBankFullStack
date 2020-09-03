@@ -2,6 +2,7 @@ package com.dollarsbank.DollarsBankbackend.Service;
 
 import com.dollarsbank.DollarsBankbackend.dao.CustomerRepository;
 import com.dollarsbank.DollarsBankbackend.model.Customer;
+import com.dollarsbank.DollarsBankbackend.utility.ValidationUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,31 +16,15 @@ public class TestCustomerService {
     private CustomerRepository custRepo;
 
     /************************* User Login ****************************/
-    public boolean loginUser(String enteredString) {
-        String removeBrackets = enteredString.substring(1, enteredString.length() - 1);
+    public boolean loginUser(String username, String password) {
 
-        String delim = "[,]";
-        String valueString = "";
-        String[] values = removeBrackets.split(delim);
-        Customer returnedCust = null;
-        ArrayList<String> onlyValues = new ArrayList<String>();
 
-        for (int i = 0; i < values.length; i++) {
-            valueString = values[i].substring(values[i].indexOf("\"") + 1, values[i].length() - 1);
-            onlyValues.add(valueString);
-        }
+        String truePassword = ValidationUtility.generatePassword(username, password);
 
-        ArrayList<Customer> allUsers = (ArrayList<Customer>) custRepo.findAll();
-        for (int i = 0; i < allUsers.size(); i++) {
-            if (allUsers.get(i).getUsername().contentEquals(onlyValues.get(0))) {
-                if (allUsers.get(i).getUsername().contentEquals(onlyValues.get(1))) {
-                    returnedCust = allUsers.get(i);
-                    System.out.println(allUsers.get(i).getUsername());
-                    return true;
-                }
-            }
-        }
-        return false;
+        return custRepo.existsByUsernameAndPassword(username, truePassword);
+
+
+
 
 
     }
@@ -54,7 +39,7 @@ public class TestCustomerService {
         Customer newCustomer = new Customer();
         int numAdded = 0;
 
-        for(int i = 0; i < onlyValues.length; ++i) {
+
             if(!custRepo.existsByUsername(onlyValues[0])) {
                 newCustomer.setId(0);
                 newCustomer.setUsername(onlyValues[0]);
@@ -62,13 +47,13 @@ public class TestCustomerService {
                 newCustomer.setName(onlyValues[2]);
                 newCustomer.setAddress(onlyValues[3]);
                 newCustomer.setContactNumber(onlyValues[4]);
-                custRepo.save(newCustomer);
+                newCustomer = custRepo.save(newCustomer);
                 if(newCustomer != null){
                     ++numAdded;
                 }
             }
-        }
-        return numAdded + "test accounts have been added";
+
+        return numAdded + " accounts have been added";
     }
 
 
