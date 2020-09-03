@@ -48,7 +48,8 @@ export default function Register() {
           <div className="form-group">
             <label htmlFor="account">Account </label>
             <select
-              className="account"
+              className="input"
+              name="account"
               onChange={(v) => setAccountType(v.target.value)}
             >
               <option value="">--Please choose an option--</option>
