@@ -3,7 +3,7 @@ import { AppContext } from "../App";
 
 export default function Customer() {
   const state = useContext(AppContext);
-  
+
   return (
     <div className="customerMain">
       <div className="accountInfo">

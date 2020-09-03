@@ -1,9 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./style.css";
 import * as Utils from "../Utils";
 import { AppContext } from "../App";
-import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const history = useHistory();
@@ -13,13 +12,17 @@ export default function Login() {
 
   async function handleLogin(event) {
     event.preventDefault();
-    const loginResult = await Utils.login({
+    const res = await Utils.login({
       username: username,
       password: password,
     });
-    // TODO login confirmation.
-    state.setUser(loginResult);
-    history.push("/main");
+    if (res === "") {
+      // TODO fancier alert.
+      alert("Invalid username. Please try again.");
+    } else {
+      state.setUser(res);
+      history.push("/main");
+    }
   }
 
   return (

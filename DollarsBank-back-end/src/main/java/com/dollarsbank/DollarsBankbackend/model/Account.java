@@ -66,9 +66,8 @@ public class Account {
 		transactions = new ArrayList<Transaction>();
 	}
 
-	public Account(long id, long custId, String accountName, AccType accType, long balance, List<Transaction> transactions) {
+	public Account(long custId, String accountName, AccType accType, long balance, List<Transaction> transactions) {
 		super();
-		this.id = id;
 		this.custId = custId;
 		this.accountName = accountName;
 		this.accType = accType;

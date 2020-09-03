@@ -1,11 +1,13 @@
 import axios from "axios";
 
 // ! URL endpoint for database server
-export const API = "http://localhost:8080";
+const API = "http://localhost:8080";
 
 export async function register(user) {
   const res = await axios.post(API + "/signup", user);
-  console.log(res);
+  // If the user could not be created, return false.
+  if (res.data.id === 0) return false;
+  return res.data;
 }
 
 export async function login(user) {
