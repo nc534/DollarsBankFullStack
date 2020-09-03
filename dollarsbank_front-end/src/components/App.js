@@ -19,15 +19,17 @@ export const AppContextProvider = (props) => {
       username: "joyfulpainter",
       password: "42!HappyTrees",
       name: "Bob Ross",
-      phone: "470-200-6700",
+      contactNumber: "470-200-6700",
       address: "New York, NY",
     },
     accounts: [
       {
+        accountID: 1,
         accountType: "savings",
         accountBalance: 400,
       },
       {
+        accountID: 2,
         accountType: "checking",
         accountBalance: 1300,
       },
