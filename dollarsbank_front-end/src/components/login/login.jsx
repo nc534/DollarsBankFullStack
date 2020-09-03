@@ -12,13 +12,17 @@ export default function Login() {
 
   async function handleLogin(event) {
     event.preventDefault();
-    const loginResult = await Utils.login({
+    const res = await Utils.login({
       username: username,
       password: password,
     });
-    // TODO login confirmation.
-    state.setUser(loginResult);
-    history.push("/main");
+    if (res === "") {
+      // TODO fancier alert.
+      alert("Invalid username. Please try again.");
+    } else {
+      state.setUser(res);
+      history.push("/main");
+    }
   }
 
   return (
