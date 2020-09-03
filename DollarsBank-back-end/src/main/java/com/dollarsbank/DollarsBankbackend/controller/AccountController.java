@@ -2,6 +2,7 @@ package com.dollarsbank.DollarsBankbackend.controller;
 
 
 import com.dollarsbank.DollarsBankbackend.Service.TestAccountService;
+import com.dollarsbank.DollarsBankbackend.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,7 @@ public class AccountController {
     private TestAccountService AccountService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/addacct")
-    public @ResponseBody String addAcct(String enteredString) throws Exception {
-        return AccountService.AcctAdd(enteredString);
+    public String AddAcct(Account account){
+        return AccountService.AcctAdd(account);
     }
 }

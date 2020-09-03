@@ -25,6 +25,8 @@ public class TestCustomerService {
 //
 //
     public Customer loginUser(Customer customer) {
+        customer.setNewPassword(customer.getPassword());
+
         return custRepo.findByUsernameAndPassword(customer.getUsername(), customer.getPassword());
 
     }
@@ -62,7 +64,10 @@ public class TestCustomerService {
 
         //returns a customer with null values if customer already exists
         //would not add already existing customer to db
+
+        customer.setNewPassword(customer.getPassword());
         if (!custRepo.existsByUsername(customer.getUsername())) {
+
             newCustomer = custRepo.save(new Customer(customer.getUsername(), customer.getPassword(), customer.getName(), customer.getAddress(), customer.getContactNumber()));
         }
         return newCustomer;
