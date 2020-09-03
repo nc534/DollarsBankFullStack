@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./style.css";
 import * as Utils from "../Utils";
-// import { GlobalContext } from "../Store";
+import { AppContext } from "../App";
 
 export default function Register() {
-  // const context = useContext(GlobalContext);
+  const history = useHistory();
+  const state = useContext(AppContext);
 
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
@@ -22,11 +23,16 @@ export default function Register() {
       password: password,
       name: name,
       address: address,
-      phone: phone,
-      accountType: accountType,
-      accountBalance: accountBalance,
+      contactNumber: phone,
+      // accountType: accountType,
+      // accountBalance: accountBalance,
     });
-    // TODO set [context.user] to the registered user and forward to Model.login.
+    if (!res) {
+      alert("Username taken. Please try again.");
+    } else {
+      state.setUser(res);
+      history.push("/main");
+    }
   }
 
   return (
@@ -37,11 +43,11 @@ export default function Register() {
         {/* TODO error div? */}
         {/* <div class="error">{ this.state.errorMsg }</div>*/}
 
-        <form onSubmit={handleRegister} class="form-main">
+        <form onSubmit={handleRegister} className="form-main">
           <div className="form-group">
             <label htmlFor="account">Account </label>
             <select
-              nameName="account"
+              className="account"
               onChange={(v) => setAccountType(v.target.value)}
             >
               <option value="">--Please choose an option--</option>
