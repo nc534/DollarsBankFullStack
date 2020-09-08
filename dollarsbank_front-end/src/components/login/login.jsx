@@ -22,6 +22,7 @@ export default function Login() {
       changeMsg();
     } else {
       state.setUser(res);
+      // TODO get account data upon endpoint resolution.
       history.push("/main");
     }
   }
