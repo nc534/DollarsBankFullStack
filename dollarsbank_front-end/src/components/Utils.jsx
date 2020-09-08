@@ -2,10 +2,11 @@ import axios from "axios";
 
 // ! URL endpoint for database server
 const API = "http://localhost:8080";
-const endpoints = {
+export const endpoints = {
   register: "/signup",
   login: "/login",
   account_create: "/addacct",
+  main: "/main",
 };
 
 export async function register(user) {
