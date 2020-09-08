@@ -5,10 +5,12 @@ import * as Utils from "../Utils";
 import { AppContext } from "../App";
 
 export default function Login() {
+
   const history = useHistory();
   const state = useContext(AppContext);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   async function handleLogin(event) {
     event.preventDefault();
@@ -16,13 +18,18 @@ export default function Login() {
       username: username,
       password: password,
     });
+
     if (res === "") {
-      // TODO fancier alert.
-      alert("Invalid username. Please try again.");
+      // TODO fancier alert. 
+        changeMsg();
     } else {
       state.setUser(res);
       history.push("/main");
     }
+  }
+
+  function changeMsg() {
+    setErrorMsg("Invalid username and password. Please try again.");
   }
 
   return (
@@ -32,8 +39,8 @@ export default function Login() {
         <div className="header">Login</div>
 
         {/* TODO add conditional rendering for login error messages */}
-        {/* <div class="error">{ this.state.errorMsg }</div>
-                    <div class="message">{this.state.message}</div> */}
+        <div className="error">{ errorMsg }</div>
+        {/* <div class="message">{this.state.message}</div> */}
 
         <form onSubmit={handleLogin} className="form-main">
           <div className="form-group">
