@@ -13,6 +13,9 @@ export const AppContextProvider = (props) => {
   const setUser = (user) => {
     setState({ ...state, user: user });
   };
+  const setAccounts = (accounts) => {
+    setAccounts({ ...state, accounts: accounts });
+  };
 
   const initState = {
     user: {
@@ -24,17 +27,16 @@ export const AppContextProvider = (props) => {
     },
     accounts: [
       {
-        accountID: 1,
-        accountType: "savings",
-        accountBalance: 400,
-      },
-      {
-        accountID: 2,
-        accountType: "checking",
-        accountBalance: 1300,
+        id: 1,
+        custID: 2,
+        accountName: "mySavings",
+        accType: 0,
+        balance: 40000,
+        transactions: [],
       },
     ],
     setUser: setUser,
+    setAccounts: setAccounts,
   };
 
   const [state, setState] = useState(initState);

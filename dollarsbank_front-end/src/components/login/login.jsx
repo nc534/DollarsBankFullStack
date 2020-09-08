@@ -5,7 +5,6 @@ import * as Utils from "../Utils";
 import { AppContext } from "../App";
 
 export default function Login() {
-
   const history = useHistory();
   const state = useContext(AppContext);
   const [username, setUsername] = useState(null);
@@ -20,8 +19,7 @@ export default function Login() {
     });
 
     if (res === "") {
-      // TODO fancier alert. 
-        changeMsg();
+      changeMsg();
     } else {
       state.setUser(res);
       history.push("/main");
@@ -37,11 +35,7 @@ export default function Login() {
       <h1>DOLLARSBANK Welcomes You!!</h1>
       <div className="container">
         <div className="header">Login</div>
-
-        {/* TODO add conditional rendering for login error messages */}
-        <div className="error">{ errorMsg }</div>
-        {/* <div class="message">{this.state.message}</div> */}
-
+        <div className="error">{errorMsg}</div>
         <form onSubmit={handleLogin} className="form-main">
           <div className="form-group">
             <label htmlFor="username">Username</label>

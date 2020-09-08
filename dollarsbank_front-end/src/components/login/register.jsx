@@ -29,7 +29,6 @@ export default function Register() {
       // accountBalance: accountBalance,
     });
     if (!res) {
-      // TODO fancier alert.
       changeMsg();
     } else {
       state.setUser(res);
@@ -45,10 +44,7 @@ export default function Register() {
     <div className="main">
       <div className="container">
         <div className="header">Register</div>
-
-        {/* TODO error div? */}
-        <div class="error">{ errorMsg }</div>
-
+        <div class="error">{errorMsg}</div>
         <form onSubmit={handleRegister} className="form-main">
           <div className="form-group">
             <label htmlFor="account">Account </label>
