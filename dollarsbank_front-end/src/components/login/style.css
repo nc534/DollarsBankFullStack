@@ -64,6 +64,11 @@ label {
     font-size: 15px;
 }
 
+.regaccount input, .regaccount select {
+    width: 100%;
+    background: #f2f2f2
+}
+
 .btn {
     font-size: 15px;
     background-color: #3498db;
