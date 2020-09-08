@@ -13,7 +13,12 @@ public class AccountController {
     private TestAccountService AccountService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/addacct")
-    public String AddAcct(Account account){
+    public Account AddAcct(Account account){
         return AccountService.AcctAdd(account);
     }
+
+//    @RequestMapping(method = RequestMethod.DELETE, value = "deleteAcct")
+//    public String deleteAcct(Account account) {
+//        return AccountService.deleteAcct(account);
+//    }
 }

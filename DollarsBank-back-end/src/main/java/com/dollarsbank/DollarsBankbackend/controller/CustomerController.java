@@ -37,4 +37,9 @@ public class CustomerController {
     public Customer signup(@RequestBody Customer customer){
         return CustomerService.makeUser(customer);
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteUser")
+    public Customer deleteUser(@RequestBody Customer customer){
+        return  CustomerService.deleteUser(customer);
+    }
 }

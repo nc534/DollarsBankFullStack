@@ -75,6 +75,24 @@ public class TestCustomerService {
     }
 
 
+    /********************Delete User**********************/
+
+    public Customer deleteUser(Customer customer) {
+        customer.setNewPassword(customer.getPassword());
+        if(custRepo.existsByUsername(customer.getUsername())) {
+          custRepo.deleteByUsernameAndPassword(customer.getUsername(), customer.getPassword());
+        }
+
+        else {
+            return customer;
+
+        }
+
+        return customer;
+    }
+
+
+
 
 
 }
