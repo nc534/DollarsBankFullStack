@@ -14,7 +14,7 @@ export const AppContextProvider = (props) => {
     setState({ ...state, user: user });
   };
   const setAccounts = (accounts) => {
-    setAccounts({ ...state, accounts: accounts });
+    setState({ ...state, accounts: accounts });
   };
 
   const initState = {
