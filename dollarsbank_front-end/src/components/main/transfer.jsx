@@ -6,7 +6,7 @@ export default function Transfer() {
 
   let today = new Date();
   let date =
-    today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
+    (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
   // let time =
   //   today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   // let dateTime = date + " " + time;
@@ -44,7 +44,7 @@ export default function Transfer() {
           {/* State would be needed to hide or show option below */}
           {destination === "other" && (
             <div id="another">
-              <label for="other_account">To Account Id </label>
+              <label htmlFor="other_account">To Account Id </label>
               <input
                 type="number"
                 name="other_account"
@@ -68,11 +68,9 @@ export default function Transfer() {
               step="0.01"
             />
           </div>
-          <div>
-            <p className="date">
-              Date:{" "}
+          <div className="date">
+              Date:
               <input type="text" id="date" readOnly placeholder={date}></input>
-            </p>
           </div>
 
           <div>

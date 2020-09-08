@@ -21,11 +21,9 @@ h1 {
     padding-right: 50px;
 }
 
-.error {
+.main .error {
 	color: #FF0000;
-	width: 80%;
-	padding-left: 30px;
-	
+	width: 70%;
 }
 
 .message {
