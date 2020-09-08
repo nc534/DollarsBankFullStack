@@ -13,8 +13,9 @@ export default function Register() {
   const [name, setName] = useState(null);
   const [address, setAddress] = useState(null);
   const [phone, setPhone] = useState(null);
-  const [accountType, setAccountType] = useState(null);
-  const [accountBalance, setAccountBalance] = useState(null);
+  const [accType, setAccountType] = useState(null);
+  const [accountName, setAccountName] = useState(null);
+  const [balance, setAccountBalance] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
   async function handleRegister(event) {
@@ -46,30 +47,24 @@ export default function Register() {
         <div className="header">Register</div>
         <div class="error">{errorMsg}</div>
         <form onSubmit={handleRegister} className="form-main">
-          <div className="form-group">
-            <label htmlFor="account">Account </label>
-            <select
-              className="input"
-              name="account"
-              onChange={(v) => setAccountType(v.target.value)}
-            >
-              <option value="">--Please choose an option--</option>
-              <option value="savings">Savings</option>
-              <option value="checking">Checking</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="initial_deposit">Amount</label>
-            <input
-              className="input"
-              type="number"
-              name="initial_deposit"
-              required
-              placeholder="0.00"
-              min="0.00"
-              step="0.01"
-              onChange={(v) => setAccountBalance(v.target.value)}
-            />
+          <div className="regaccount">
+            <div className="form-group">
+              <label htmlFor="accType">Account </label>
+              <select name="accType" required onChange={(v) => setAccountType(v.target.value)}>
+                <option value="">--Please choose an option--</option>
+                <option value="SAVINGS">Savings</option>
+                <option value="CHECKING">Checking</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="accountName">Account Name </label>
+                <input type="text" name="accountName" className="accountName" required placeholder="Enter a name for your account" onChange={(v) => setAccountName(v.target.value)}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="balance">Amount </label>
+                {/* Need to change the value to pennies */}
+                <input type="number" name="balance" required placeholder="0.00" min="0.00" step="0.01" onChange={(v) => setAccountBalance(v.target.value)}/>
+            </div>
           </div>
           <div className="form-group">
             <label htmlFor="name">Name</label>
