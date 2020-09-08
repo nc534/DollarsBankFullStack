@@ -31,6 +31,8 @@ public class TestAccountService extends Customer{
         if (!accRepo.existsByCustIdAndAccountName(account.getCustId(),account.getAccountName())) {
             newAccount = accRepo.save(new Account(account.getCustId(),account.getAccountName(), account.getAccType(), account.getBalance(), account.getTransactions()));
         }
+
+
         return newAccount;
 
 
@@ -39,23 +41,10 @@ public class TestAccountService extends Customer{
     }
     /************************Showing account data*****************/
 
-    public String showAcct(String username, String password, String accName) {
-        String truePassword = ValidationUtility.generatePassword(username, password);
-        Customer customer = custRepo.findByUsernameAndPassword(username, truePassword);
+    public Account showAcct(long id, String accountName) {
 
-        if(customer == null) {
-            return "Invalid";
-        }
 
-        Account account = accRepo.findByCustIdAndAccountName(customer.getId(), accName);
-        if(account == null) {
-            return "Does not exist";
-        }
-        else {
-            return account.toString();
-        }
-
-       
+       return accRepo.findByCustIdAndAccountName(id, accountName);
     }
 
 
@@ -63,20 +52,14 @@ public class TestAccountService extends Customer{
 
 /************************Deleting Accoount*********************/
 
-    public String deleteAcct(String accName, String username, String password) {
-        String truePassword = ValidationUtility.generatePassword(username, password);
-        Customer customer = custRepo.findByUsernameAndPassword(username, truePassword);
-        if (accRepo.existsByCustIdAndAccountName(customer.getId(), accName)) {
+    public String deleteAcct(Account account) {
 
-            Account account = accRepo.findByCustIdAndAccountName(customer.getId(), accName);
-            accRepo.deleteByCustIdAndAccountName(customer.getId(), accName);
+        accRepo.deleteByCustIdAndAccountName(account.getCustId(), account.getAccountName());
 
+        if (accRepo.existsById(account.getId())) {
+            return "deletion failed";
         }
 
-        else {
-            return "account does not exist";
-
-        }
 
         return "success";
     }

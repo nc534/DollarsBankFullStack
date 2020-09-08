@@ -38,8 +38,10 @@ public class CustomerController {
         return CustomerService.makeUser(customer);
     }
 
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteUser")
-    public Customer deleteUser(@RequestBody Customer customer){
+    public String deleteUser(@RequestBody Customer customer){
+//        customer.setNewPassword(customer.getPassword());
         return  CustomerService.deleteUser(customer);
     }
 }
