@@ -18,7 +18,7 @@ export default function Login() {
       password: password,
     });
 
-    if (res === "") {
+    if (!res) {
       changeMsg();
     } else {
       state.setUser(res);
