@@ -13,6 +13,9 @@ export const AppContextProvider = (props) => {
   const setUser = (user) => {
     setState({ ...state, user: user });
   };
+  const setAccounts = (accounts) => {
+    setAccounts({ ...state, accounts: accounts });
+  };
 
   const initState = {
     user: {
@@ -35,6 +38,7 @@ export const AppContextProvider = (props) => {
       },
     ],
     setUser: setUser,
+    setAccounts: setAccounts,
   };
 
   const [state, setState] = useState(initState);
