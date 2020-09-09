@@ -18,4 +18,14 @@ public class TransactionController {
         return transactionService.makeTransfer(transfer);
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/makeDeposit")
+    public String makeDespoti(@RequestBody PendingTransaction deposit) {
+        return transactionService.deposit(deposit);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/makeWithdrawal")
+    public String makeWithdrawal(@RequestBody PendingTransaction withdrawal) {
+        return transactionService.withdrawal(withdrawal);
+    }
+
 }

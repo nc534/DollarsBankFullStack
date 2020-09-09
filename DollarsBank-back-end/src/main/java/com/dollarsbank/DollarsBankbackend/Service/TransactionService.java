@@ -58,10 +58,56 @@ public class TransactionService {
     }
 
 
-//    public String deposit(PendingTransaction deposit) {
-//
-//    }
-//
+    public String deposit(PendingTransaction deposit) {
+
+        Account makeDeposit = accRepo.findById(deposit.getTargetAccId());
+
+        String deposit_memo = "Local deposit : " + deposit.getMemo();
+
+        if (makeDeposit == null) {
+            return "invalid does not exist";
+        }
+
+        if(makeDeposit.addAmount(deposit.getAmount(), deposit_memo)) {
+
+
+
+            accRepo.save(makeDeposit);
+
+
+        }
+
+        else {
+            return "failed to deposit";
+        }
+
+        return "Deposit done";
+
+    }
+
+    public String withdrawal(PendingTransaction withdrawal) {
+
+        Account makeWithdrawal = accRepo.findById(withdrawal.getSourceAccId());
+
+        String withdrawal_memo = "Local withdrawal : " + withdrawal.getMemo();
+
+        if (makeWithdrawal == null) {
+            return "invalid does not exist";
+
+        }
+
+        if(makeWithdrawal.subtractAmount(withdrawal.getAmount(), withdrawal_memo)) {
+            accRepo.save(makeWithdrawal);
+
+        }
+
+        else{
+            return "failed to withdraw";
+        }
+
+        return "success";
+    }
+
 
 
 }
