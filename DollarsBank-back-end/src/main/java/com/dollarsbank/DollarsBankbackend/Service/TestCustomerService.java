@@ -85,9 +85,8 @@ public class TestCustomerService {
     /********************Delete User**********************/
 
     public String deleteUser(String username, String password, long custId) {
-        String truePassword = ValidationUtility.generatePassword(username, password);
 
-       custRepo.deleteByUsernameAndPassword(username, truePassword);
+       custRepo.deleteByUsernameAndPassword(username, password);
 
 
        if(custRepo.existsByUsername(username)){

@@ -21,9 +21,9 @@ public class AccountController {
         return AccountService.AcctAdd(account);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/deleteAcct/{custId}/{accountName}")
-    public String deleteAcct(@PathVariable(value = "custId") long custId, @PathVariable(value = "accountName") String accountName) {
-        return AccountService.deleteAcct(custId, accountName);
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteAcct")
+	public String deleteAcct(@RequestBody Account account) {
+        return AccountService.deleteAcct(account.getCustId(), account.getAccountName());
     }
 
 
