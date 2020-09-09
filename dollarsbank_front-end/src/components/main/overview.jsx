@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../App";
 
 export default function Overview() {
-  const state = useContext(AppContext);
+  const [state] = useContext(AppContext);
   // TODO get list of accounts via state.accounts and display in loop divs or something.
 
   return (
