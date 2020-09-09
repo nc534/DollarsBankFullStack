@@ -22,21 +22,21 @@ public class AccountController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteAcct")
-    public String deleteAcct(@RequestBody Account account) {
-        return AccountService.deleteAcct(account);
+	public String deleteAcct(@RequestBody Account account) {
+        return AccountService.deleteAcct(account.getCustId(), account.getAccountName());
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/showAcct")
-    public Account showAcct(@RequestBody Account account) {
+    @RequestMapping(method = RequestMethod.GET, value = "/showAcct/{custId}/{accountName}")
+    public Account showAcct(@PathVariable(value = "custId") long custId, @PathVariable(value = "accountName") String accountName) {
 
 
-        return AccountService.showAcct(account.getCustId(), account.getAccountName());
+        return AccountService.showAcct(custId, accountName);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/showAllAcct")
-    public List<Account> showAllAcct(@RequestBody Customer customer) {
-        return AccountService.showAllAcct(customer);
+    @RequestMapping(method = RequestMethod.GET, value = "/showAllAcct/{custId}")
+    public List<Account> showAllAcct(@PathVariable(value = "custId") long custId) {
+        return AccountService.showAllAcct(custId);
     }
 
 }

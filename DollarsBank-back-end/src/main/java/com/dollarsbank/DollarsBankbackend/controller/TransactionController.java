@@ -19,7 +19,7 @@ public class TransactionController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/makeDeposit")
-    public String makeDespoti(@RequestBody PendingTransaction deposit) {
+    public String makeDeposit(@RequestBody PendingTransaction deposit) {
         return transactionService.deposit(deposit);
     }
 

@@ -27,32 +27,30 @@ public class TestAccountService extends Customer{
 
     public Account AcctAdd(Account account) {
 
-        Account newAccount = new Account();
 
         if (!accRepo.existsByCustIdAndAccountName(account.getCustId(),account.getAccountName())) {
-            newAccount = accRepo.save(new Account(account.getCustId(),account.getAccountName(), account.getAccType(), account.getBalance(), account.getTransactions()));
+            return accRepo.save(account);
+
         }
 
-
-        return newAccount;
-
-
-
+        else {
+            return null;
+        }
 
     }
     /************************Showing account data*****************/
 
-    public Account showAcct(long id, String accountName) {
+    public Account showAcct(long custId, String accountName) {
 
 
-       return accRepo.findByCustIdAndAccountName(id, accountName);
+       return accRepo.findByCustIdAndAccountName(custId, accountName);
     }
 
     /************Showing all accounts**************/
 
-    public List<Account> showAllAcct(Customer customer) {
+    public List<Account> showAllAcct(long custId) {
 
-        return accRepo.findAllByCustId(customer.getId());
+        return accRepo.findAllByCustId(custId);
 
     }
 
@@ -60,11 +58,12 @@ public class TestAccountService extends Customer{
 
     /************************Deleting Accoount*********************/
 
-    public String deleteAcct(Account account) {
+    public String deleteAcct(long custId, String accountName) {
 
-        accRepo.deleteByCustIdAndAccountName(account.getCustId(), account.getAccountName());
 
-        if (accRepo.existsById(account.getId())) {
+        accRepo.deleteByCustIdAndAccountName(custId, accountName);
+
+        if (accRepo.existsByCustIdAndAccountName(custId, accountName)) {
             return "deletion failed";
         }
 

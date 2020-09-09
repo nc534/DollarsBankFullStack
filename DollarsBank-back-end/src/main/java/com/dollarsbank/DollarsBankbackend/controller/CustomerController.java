@@ -29,8 +29,8 @@ public class CustomerController {
     }*/
 
     @RequestMapping(method = RequestMethod.POST, value = "/login")
-    public Customer loginClicked(@RequestBody Customer customer){
-        return CustomerService.loginUser(customer);
+	public Customer loginClicked(@RequestBody Customer customer){
+        return CustomerService.loginUser(customer.getUsername(), customer.getPassword());
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/signup")
@@ -40,8 +40,8 @@ public class CustomerController {
 
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteUser")
-    public String deleteUser(@RequestBody Customer customer){
+	public String deleteUser(@RequestBody Customer customer){
 //        customer.setNewPassword(customer.getPassword());
-        return  CustomerService.deleteUser(customer);
+        return  CustomerService.deleteUser(customer.getUsername(), customer.getPassword(), customer.getId());
     }
 }

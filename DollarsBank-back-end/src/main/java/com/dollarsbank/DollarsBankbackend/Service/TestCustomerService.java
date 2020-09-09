@@ -1,5 +1,6 @@
 package com.dollarsbank.DollarsBankbackend.Service;
 
+import com.dollarsbank.DollarsBankbackend.dao.AccountRepository;
 import com.dollarsbank.DollarsBankbackend.dao.CustomerRepository;
 import com.dollarsbank.DollarsBankbackend.model.Customer;
 import com.dollarsbank.DollarsBankbackend.utility.ValidationUtility;
@@ -11,6 +12,9 @@ public class TestCustomerService {
 
     @Autowired
     private CustomerRepository custRepo;
+
+    @Autowired
+    private AccountRepository accRepo;
 
     /************************* User Login ****************************/
 //<<<<<<< HEAD
@@ -24,10 +28,10 @@ public class TestCustomerService {
 //
 //
 //
-    public Customer loginUser(Customer customer) {
-        customer.setNewPassword(customer.getPassword());
+    public Customer loginUser(String username, String password) {
+        String truePassword = ValidationUtility.generatePassword(username, password);
 
-        return custRepo.findByUsernameAndPassword(customer.getUsername(), customer.getPassword());
+        return custRepo.findByUsernameAndPassword(username, truePassword);
 
     }
 
@@ -60,7 +64,6 @@ public class TestCustomerService {
 //=======
     public Customer makeUser(Customer customer) {
 
-        Customer newCustomer = new Customer();
 
         //returns a customer with null values if customer already exists
         //would not add already existing customer to db
@@ -68,20 +71,30 @@ public class TestCustomerService {
         customer.setNewPassword(customer.getPassword());
         if (!custRepo.existsByUsername(customer.getUsername())) {
 
-            newCustomer = custRepo.save(new Customer(customer.getUsername(), customer.getPassword(), customer.getName(), customer.getAddress(), customer.getContactNumber()));
+            return custRepo.save(customer);
         }
-        return newCustomer;
+
+        else {
+            return null;
+        }
+
 
     }
 
 
     /********************Delete User**********************/
 
-    public String deleteUser(Customer customer) {
-       custRepo.deleteByUsernameAndPassword(customer.getUsername(), customer.getPassword());
+    public String deleteUser(String username, String password, long custId) {
 
-       if(custRepo.existsByUsername(customer.getUsername())){
+       custRepo.deleteByUsernameAndPassword(username, password);
+
+
+       if(custRepo.existsByUsername(username)){
            return "deletion failed";
+       }
+
+       else {
+           accRepo.deleteByCustId(custId);
        }
 
        return "deleted";

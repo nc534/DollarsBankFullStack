@@ -24,5 +24,8 @@ public interface AccountRepository extends CrudRepository<Account, String>{
 	
 	@Transactional
 	void deleteById(long id);
+
+	@Transactional
+	void deleteByCustId(long custId);
 	
 }
