@@ -9,6 +9,7 @@ export const endpoints = {
   getAccounts: "/showAllAcct",
   main: "/main",
   makeDeposit: "/makeDeposit",
+  makeWithdrawal: "/makeWithdrawal",
 };
 
 export async function register(user) {
@@ -66,6 +67,26 @@ export async function makeDeposit(id, amount, memo) {
     amount,
     memo,
   });
-  // TODO conditional failure.
+  if (res.data !== "Deposit done") {
+    // TODO conditional failure.
+  }
+  return res.data;
+}
+
+/**
+ * Makes a withdrawal from the specified account.
+ * @param {String} id ID of account to withdraw from.
+ * @param {Number} amount Amount of money (cents) to withdrawl.
+ * @param {String} memo Note regarding the withdrawal's association.
+ */
+export async function makeWithdrawal(id, amount, memo) {
+  const res = await axios.post(`${API}${endpoints.makeWithdrawal}`, {
+    targetAccId: id,
+    amount,
+    memo,
+  });
+  if (res.data !== "success") {
+    // TODO conditional failure.
+  }
   return res.data;
 }
