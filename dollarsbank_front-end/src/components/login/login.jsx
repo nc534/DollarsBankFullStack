@@ -6,25 +6,36 @@ import { AppContext } from "../App";
 
 export default function Login() {
   const history = useHistory();
-  const state = useContext(AppContext);
+  const [state, dispatch] = useContext(AppContext);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
   async function handleLogin(event) {
     event.preventDefault();
-    const res = await Utils.login({
+
+    const resUser = await Utils.login({
       username: username,
       password: password,
     });
-
-    if (!res) {
+    if (!resUser) {
       changeMsg();
+      return;
     } else {
-      state.setUser(res);
-      // TODO get account data upon endpoint resolution.
-      history.push("/main");
+      dispatch({
+        type: "SET_USER",
+        payload: resUser,
+      });
     }
+
+    const resAccts = await Utils.getAccounts(resUser);
+    // TODO error handling.
+    dispatch({
+      type: "SET_ACCOUNTS",
+      payload: resAccts,
+    });
+
+    history.push("/main");
   }
 
   function changeMsg() {
