@@ -4,7 +4,7 @@ import Login from "./login/login";
 import Register from "./login/register";
 import Main from "./main/main";
 
-// Global context currently follows a Reducer hierarhcy, as shown here:
+// Global context currently follows a Reducer hierarchy, as shown here:
 // https://codeburst.io/global-state-with-react-hooks-and-context-api-87019cc4f2cf
 
 // ? Defines an initial state structure.
@@ -20,7 +20,7 @@ const initialState = {
   accounts: [
     {
       id: 1,
-      custID: 2,
+      custId: 2,
       accountName: "mySavings",
       accType: 0,
       balance: 40000,
