@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TestAccountService extends Customer{
@@ -47,10 +48,17 @@ public class TestAccountService extends Customer{
        return accRepo.findByCustIdAndAccountName(id, accountName);
     }
 
+    /************Showing all accounts**************/
+
+    public List<Account> showAllAcct(Customer customer) {
+
+        return accRepo.findAllByCustId(customer.getId());
+
+    }
 
 
 
-/************************Deleting Accoount*********************/
+    /************************Deleting Accoount*********************/
 
     public String deleteAcct(Account account) {
 
