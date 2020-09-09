@@ -18,10 +18,11 @@ export default function Login() {
       password: password,
     });
 
-    if (res === "") {
+    if (!res) {
       changeMsg();
     } else {
       state.setUser(res);
+      // TODO get account data upon endpoint resolution.
       history.push("/main");
     }
   }
