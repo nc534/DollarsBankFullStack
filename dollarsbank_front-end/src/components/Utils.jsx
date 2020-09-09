@@ -43,12 +43,12 @@ export async function createAccount(account) {
 }
 
 /**
- * Retrieves all accounts the provided customer owns.
- * @param {*} customer The Customer object to retrieve accounts for. Requires only "id" field.
+ * Retrieves all accounts for a specified customer
+ * @param {String} id The customer ID to retrieve accounts for.
  * @returns An array of accounts.
  */
-export async function getAccounts(customer) {
-  const res = await axios.post(API + endpoints.getAccounts, customer);
+export async function getAccounts(id) {
+  const res = await axios.get(`${API}${endpoints.getAccounts}/${id}`);
   // TODO conditional failure.
   return res.data;
 }

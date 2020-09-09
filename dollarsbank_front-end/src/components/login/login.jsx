@@ -28,7 +28,7 @@ export default function Login() {
       });
     }
 
-    const resAccts = await Utils.getAccounts(resUser);
+    const resAccts = await Utils.getAccounts(resUser.id);
     // TODO error handling.
     dispatch({
       type: "SET_ACCOUNTS",
