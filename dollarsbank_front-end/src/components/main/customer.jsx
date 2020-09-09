@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../App";
 
 export default function Customer() {
-  const state = useContext(AppContext);
+  const [state] = useContext(AppContext);
 
   return (
     <div className="customerMain">

@@ -6,7 +6,7 @@ import { AppContext } from "../App";
 
 export default function Register() {
   const history = useHistory();
-  const state = useContext(AppContext);
+  const [state, dispatch] = useContext(AppContext);
 
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
@@ -17,35 +17,53 @@ export default function Register() {
   const [accountName, setAccountName] = useState(null);
   const [balance, setAccountBalance] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-
+  
   async function handleRegister(event) {
     event.preventDefault();
-    const res = await Utils.register({
+
+    // step 1, register customer.
+    const resSignup = await Utils.register({
       username: username,
       password: password,
       name: name,
       address: address,
       contactNumber: phone,
-      // accountType: accountType,
-      // accountBalance: accountBalance,
     });
-    if (!res) {
-      changeMsg();
+    if (!resSignup) {
+      setErrorMsg("Username taken. Please try again.");
+      return;
     } else {
-      state.setUser(res);
-      history.push("/login");
+      dispatch({
+        type: "SET_USER",
+        payload: resSignup,
+      });
     }
-  }
 
-  function changeMsg() {
-    setErrorMsg("Username taken. Please try again.");
+    // step 2, create accounts.
+    const resAccount = await Utils.createAccount({
+      custId: resSignup.id,
+      accountName: accountName,
+      accType: accType,
+      balance: balance,
+      transactions: [],
+    });
+    if (!resAccount) {
+      setErrorMsg("Account creation failed. Please try again.");
+      return;
+    } else {
+      dispatch({
+        type: "SET_ACCOUNTS",
+        payload: resAccount,
+      });
+      history.push(Utils.endpoints.main);
+    }
   }
 
   return (
     <div className="main">
       <div className="container">
         <div className="header">Register</div>
-        <div class="error">{errorMsg}</div>
+        <div className="error">{errorMsg}</div>
         <form onSubmit={handleRegister} className="form-main">
           <div className="regaccount">
             <div className="form-group">
