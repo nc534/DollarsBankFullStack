@@ -8,6 +8,7 @@ export const endpoints = {
   account_create: "/addacct",
   getAccounts: "/showAllAcct",
   main: "/main",
+  makeDeposit: "/makeDeposit",
 };
 
 export async function register(user) {
@@ -43,12 +44,28 @@ export async function createAccount(account) {
 }
 
 /**
- * Retrieves all accounts for a specified customer
+ * Retrieves all accounts for a specified customer.
  * @param {String} id The customer ID to retrieve accounts for.
  * @returns An array of accounts.
  */
 export async function getAccounts(id) {
   const res = await axios.get(`${API}${endpoints.getAccounts}/${id}`);
+  // TODO conditional failure.
+  return res.data;
+}
+
+/**
+ * Makes a deposit to the specified account.
+ * @param {String} id ID of account to deposit into.
+ * @param {Number} amount Amount of money (cents) to deposit.
+ * @param {String} memo Note regarding the deposit's association.
+ */
+export async function makeDeposit(id, amount, memo) {
+  const res = await axios.post(`${API}${endpoints.makeDeposit}`, {
+    targetAccId: id,
+    amount,
+    memo,
+  });
   // TODO conditional failure.
   return res.data;
 }

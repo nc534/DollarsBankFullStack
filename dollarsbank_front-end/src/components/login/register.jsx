@@ -44,7 +44,7 @@ export default function Register() {
       custId: resSignup.id,
       accountName: accountName,
       accType: accType,
-      balance: balance,
+      balance: 0,
       transactions: [],
     });
     if (!resAccount) {
@@ -57,6 +57,14 @@ export default function Register() {
       });
       history.push(Utils.endpoints.main);
     }
+
+    // step 3, make deposit.
+    const resDeposit = await Utils.makeDeposit(
+      resAccount.id,
+      balance,
+      "Initial deposit."
+    );
+    console.log("Made deposit:", resDeposit);
   }
 
   return (
