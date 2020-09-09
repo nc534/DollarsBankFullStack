@@ -6,6 +6,7 @@ export const endpoints = {
   register: "/signup",
   login: "/login",
   account_create: "/addacct",
+  getAccounts: "/showAllAcct",
   main: "/main",
 };
 
@@ -31,7 +32,7 @@ export function logout() {
 /**
  * POSTs an Account object to the server.
  * @param {*} account The account to be sent.
- * @returns The created account. If already exists, returns with null values.
+ * @returns The created account. If already exists, returns false.
  */
 export async function createAccount(account) {
   const res = await axios.post(API + endpoints.account_create, account);
@@ -41,6 +42,13 @@ export async function createAccount(account) {
   return res.data;
 }
 
-export async function getAccounts() {
-  // TODO when endpoint exists...
+/**
+ * Retrieves all accounts the provided customer owns.
+ * @param {*} customer The Customer object to retrieve accounts for. Requires only "id" field.
+ * @returns An array of accounts.
+ */
+export async function getAccounts(customer) {
+  const res = await axios.post(API + endpoints.getAccounts, customer);
+  // TODO conditional failure.
+  return res.data;
 }
