@@ -55,7 +55,6 @@ export default function Register() {
         type: "SET_ACCOUNTS",
         payload: resAccount,
       });
-      history.push(Utils.endpoints.main);
     }
 
     // step 3, make deposit.
@@ -64,7 +63,7 @@ export default function Register() {
       balance,
       "Initial deposit."
     );
-    console.log("Made deposit:", resDeposit);
+    history.push(Utils.endpoints.login);
   }
 
   return (
