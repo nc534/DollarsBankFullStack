@@ -13,8 +13,8 @@ public class AccountController {
     private TestAccountService AccountService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/addacct")
-    public Account AcctAdd(@RequestBody Account account){
-        System.out.println(account.toString());
+    public Account AcctAdd(@RequestBody Account account) {
+//        System.out.println(account.toString());
         return AccountService.AcctAdd(account);
     }
 
@@ -22,4 +22,13 @@ public class AccountController {
     public String deleteAcct(@RequestBody Account account) {
         return AccountService.deleteAcct(account);
     }
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/showAcct")
+    public Account showAcct(@RequestBody Account account) {
+
+
+        return AccountService.showAcct(account.getCustId(), account.getAccountName());
+    }
+
 }
