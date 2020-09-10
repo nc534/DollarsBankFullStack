@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
+import Select from 'react-select';
 import "./style.css";
 import * as Utils from "../Utils";
 import { AppContext } from "../App";
@@ -17,6 +18,16 @@ export default function Register() {
   const [accountName, setAccountName] = useState(null);
   const [balance, setAccountBalance] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const accTypes = [
+    {
+        "value": "CHECKING",
+        "label": "Checking"
+    },
+    {
+        "value": "SAVINGS",
+        "label": "Savings"
+    }
+  ];
   
   async function handleRegister(event) {
     event.preventDefault();
@@ -75,11 +86,11 @@ export default function Register() {
           <div className="regaccount">
             <div className="form-group">
               <label htmlFor="accType">Account </label>
-              <select name="accType" required onChange={(v) => setAccountType(v.target.value)}>
-                <option value="">--Please choose an option--</option>
-                <option value="SAVINGS">Savings</option>
-                <option value="CHECKING">Checking</option>
-              </select>
+              <Select name="accType"
+                options={accTypes} 
+                required 
+                onChange={(v) => setAccountType(v.value)}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="accountName">Account Name </label>
@@ -148,10 +159,12 @@ export default function Register() {
               onChange={(v) => setPassword(v.target.value)}
             />
           </div>
-          <button type="submit" className="btn">
-            Register
-          </button>
-          <div>
+          <div className="form-group">
+            <button type="submit" className="btn">
+              Register
+            </button>
+          </div>
+          <div className="form-group">
             <p>Already have an account?</p>
             <Link to="/login">
               <p>Login</p>
