@@ -45,6 +45,10 @@ export default function NewAccount() {
       balance * 100,
       "Initial deposit."
     );
+    if (!resDeposit) {
+      // setErrorMsg("Account creation failed. Please try again.");
+      return;
+    }
 
     // step 3, refresh accounts.
     const resAccts = await Utils.getAccounts(state.user.id);

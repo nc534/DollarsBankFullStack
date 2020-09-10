@@ -74,6 +74,10 @@ export default function Register() {
       balance * 100,
       "Initial deposit."
     );
+    if (!resDeposit) {
+      setErrorMsg("Account creation failed. Please try again.");
+      return;
+    }
     history.push(Utils.endpoints.login);
   }
 
