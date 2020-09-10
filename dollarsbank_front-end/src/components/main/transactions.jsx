@@ -13,12 +13,9 @@ export default class Transactions extends Component {
                     <table>
                         <thead>
                             <tr>
-                                <th>Account ID</th>
-                                <th>Transaction Date</th>
-                                <th>Transaction Type</th>
-                                <th>Transfer From</th>
-                                <th>Transfer To</th>
-                                <th>Transaction Amount</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Transaction</th>
                             </tr>
                         </thead>
                         <tbody>
