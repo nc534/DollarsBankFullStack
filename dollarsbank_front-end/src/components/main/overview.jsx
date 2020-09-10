@@ -44,7 +44,7 @@ function Accounts() {
                         </p>
                         </div>
                         <div className="AccountBalance">
-                            <p>${account.balance}</p>
+                            <p>${account.balance.toFixed(2)}</p>
                         </div>
                     </div>
                 );
