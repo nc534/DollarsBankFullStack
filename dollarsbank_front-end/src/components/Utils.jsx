@@ -52,6 +52,11 @@ export async function createAccount(account) {
 export async function getAccounts(id) {
   const res = await axios.get(`${API}${endpoints.getAccounts}/${id}`);
   // TODO conditional failure.
+  const accounts = res.data;
+  // Converts the provided value in cents to a display value of dollars.
+  for (const account of accounts) {
+    account.balance /= 100.0;
+  }
   return res.data;
 }
 

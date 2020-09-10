@@ -71,7 +71,7 @@ export default function Register() {
     // step 3, make deposit.
     const resDeposit = await Utils.makeDeposit(
       resAccount.id,
-      balance,
+      balance * 100,
       "Initial deposit."
     );
     history.push(Utils.endpoints.login);
