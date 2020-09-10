@@ -86,7 +86,7 @@ export async function makeDeposit(id, amount, memo) {
  */
 export async function makeWithdrawal(id, amount, memo) {
   const res = await axios.post(`${API}${endpoints.makeWithdrawal}`, {
-    targetAccId: id,
+    sourceAccId: id,
     amount,
     memo,
   });

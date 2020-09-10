@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import { AppContext } from "../App";
 import Select from 'react-select';
+import * as Utils from "../Utils";
 
 export default function DepositWithdraw(){
-    const [state] = useContext(AppContext);
+    const history = useHistory();
+    const [state, dispatch] = useContext(AppContext);
     const transaction = [
         {
             "value": "deposit",
@@ -20,7 +22,37 @@ export default function DepositWithdraw(){
         "label": a.accountName
     }));
 
+    const [transactionType, setTransactionType] = useState(undefined);
+    const [account, setAccount] = useState(null);
+    const [balance, setAccountBalance] = useState(null);
     const [memo, setMemo] = useState(undefined);
+
+    async function handleTransaction(event) {
+        event.preventDefault();
+
+        if(transactionType === "deposit"){
+            await Utils.makeDeposit(
+                account,
+                balance,
+                memo
+            );
+        }else if (transactionType === "withdraw"){
+            await Utils.makeWithdrawal(
+                account,
+                balance,
+                memo
+            );
+        }
+
+        const resAccts = await Utils.getAccounts(state.user.id);
+
+        dispatch({
+            type: "SET_ACCOUNTS",
+            payload: resAccts,
+        });
+
+        history.push("/overview");
+    }
 
         return(
             <div className="customerMain">
@@ -29,13 +61,14 @@ export default function DepositWithdraw(){
                             
                     {/* <div class="error">{ this.state.errorMsg }</div> */}
                             
-                    <form action="" method="post" className="form">
+                    <form onSubmit={handleTransaction} className="form">
                     
                         <div className="form-group">
                             <label htmlFor="transaction">Transaction Type </label>
                             <Select name="transaction"
                                     className="select"
                                     options={transaction}
+                                    onChange={(v) => setTransactionType(v.value)}
                             />
                         </div>
                         {/* Change to list Account Name */}
@@ -45,11 +78,12 @@ export default function DepositWithdraw(){
                             <Select name="account"
                                     className="select"
                                     options={accounts}
+                                    onChange={(v) => setAccount(v.value)}
                             />
                         </div>
                         <div className="form-group">
                             <label htmlFor="amount">Amount </label>
-                            <input type="number" name="amount" required placeholder="0.00" min="0.00" step="0.01"/>
+                            <input type="number" name="amount" required placeholder="0.00" min="0.00" step="0.01" onChange={(v) => setAccountBalance(v.target.value*100)}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="memo">Note </label>
