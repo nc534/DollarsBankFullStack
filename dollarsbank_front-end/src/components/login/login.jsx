@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./style.css";
 import * as Utils from "../Utils";
@@ -10,6 +10,18 @@ export default function Login() {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+
+  // Clears the application memory upon page load.
+  useEffect(() => {
+    dispatch({
+      type: "SET_USER",
+      payload: null,
+    });
+    dispatch({
+      type: "SET_ACCOUNTS",
+      payload: [],
+    });
+  }, []);
 
   async function handleLogin(event) {
     event.preventDefault();
