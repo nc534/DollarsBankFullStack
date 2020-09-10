@@ -1,9 +1,26 @@
-import React, {Component} from 'react';
+import React, { useState, useContext } from 'react';
 import {Link} from 'react-router-dom';
+import { AppContext } from "../App";
+import Select from 'react-select';
 
-export default class DepositWithdraw extends Component {
+export default function DepositWithdraw(){
+    const [state] = useContext(AppContext);
+    const transaction = [
+        {
+            "value": "deposit",
+            "label": "Deposit"
+        },
+        {
+            "value": "withdraw",
+            "label": "Withdraw"
+        }
+    ];
+    const accounts = state.accounts.map(a => ({
+        "value": a.id,
+        "label": a.accountName
+    }));
 
-    render() {
+    const [memo, setMemo] = useState(undefined);
 
         return(
             <div className="customerMain">
@@ -14,36 +31,39 @@ export default class DepositWithdraw extends Component {
                             
                     <form action="" method="post" className="form">
                     
-                        <div>
+                        <div className="form-group">
                             <label htmlFor="transaction">Transaction Type </label>
-                            <select name="transaction">
-                                <option value="">--Please choose an option--</option>
-                                <option value="deposit">Deposit</option>
-                                <option value="withdraw">Withdraw</option>
-                            </select>
+                            <Select name="transaction"
+                                    className="select"
+                                    options={transaction}
+                            />
                         </div>
-                        <div>
+                        {/* Change to list Account Name */}
+                        {/* Need to convert account name to id */}
+                        <div className="form-group">
                             <label htmlFor="account">Account </label>
-                            <select name="account">
-                                <option value="">--Please choose an option--</option>
-                                <option value="savings">Savings</option>
-                                <option value="checking">Checking</option>
-                            </select>
+                            <Select name="account"
+                                    className="select"
+                                    options={accounts}
+                            />
                         </div>
-                        <div>
-                            <label htmlFor="transaction_amount">Amount </label>
-                            <input type="number" name="transaction_amount" required placeholder="0.00" min="0.00" step="0.01"/>
+                        <div className="form-group">
+                            <label htmlFor="amount">Amount </label>
+                            <input type="number" name="amount" required placeholder="0.00" min="0.00" step="0.01"/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="memo">Note </label>
+                            <input type="text" name="memo" className="memo" value={memo} required placeholder="e.g. paycheck" onChange={(v) => setMemo(v.target.value)}/>
                         </div>
                         
-                        <div>
+                        <div className="form-group">
                             <button type="submit" className="btn">Submit</button>
                             
                             <Link to="/overview" className="cancel">Cancel</Link>
-                            {/* <button type="button" name="cancel" class="cancel" onclick="history.back()">Cancel</button> */}
                         </div>
                     </form>
                 </div>
             </div>
         )
-    }
+
 }

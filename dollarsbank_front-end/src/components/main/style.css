@@ -89,9 +89,15 @@ h3 {
 }
 
 .transactions table {
-    border: solid black 1px;
+    border: 20px solid #004B8C;
     padding: 10px;
     border-collapse: collapse;
+}
+
+.transactions thead {
+    background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+    border-bottom: 2px solid #444444;
+    color: white;
 }
 
 .transactions th, td {
@@ -118,25 +124,29 @@ h3 {
     padding-bottom: 30px;
 }
 
-.form div{
+.form-group {
     padding: 20px;
 }
 
-input, select {
-    background: #fcfcfc;
+input {
     width: 10%;
-    border: 0;
+    border: 1px lightgray solid;
+    border-radius: 5px;
     margin: 0 0 15px;
     padding: 15px;
     box-sizing: border-box;
     font-size: 15px;
 }
 
-select {
+.select {
     width: 18%;
 }
 
 .accountName {
+    width: 18%;
+}
+
+.memo {
     width: 18%;
 }
 

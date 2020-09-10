@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AppContext } from "../App";
+import Select from 'react-select';
 
 export default function Transfer() {
-  const [destination, setDestination] = useState(undefined);
+  const [sourceAccId, setSource] = useState(undefined);
+  const [targetAccId, setDestination] = useState(undefined);
+  const [memo, setMemo] = useState(undefined);
+  const [state] = useContext(AppContext);
+  const accounts = state.accounts.map(a => ({
+    "value": a.id,
+    "label": a.accountName
+  }));
 
   let today = new Date();
   let date =
@@ -18,69 +27,72 @@ export default function Transfer() {
 
         {/* <div class="error">{ this.state.errorMsg }</div> */}
 
+        {/* Change to list Account Name */}
+        {/* Need to convert account name to id */}
         <form action="" method="post" className="form">
-          <div>
+          <div className="form-group">
             <label htmlFor="account_from">Transfer From </label>
-            <select name="account_from">
-              <option value="">--Please choose an option--</option>
-              <option value="savings">Savings</option>
-              <option value="checking">Checking</option>
-            </select>
+            <Select 
+              name="account_from" 
+              className="select"
+              options={accounts} 
+              onChange={(v) => setSource(v.value)}
+            />
           </div>
-          <div>
+          {/* Change to list Account Name */}
+          {/* Need to convert account name to id */}
+          <div className="form-group">
             <label htmlFor="account_to">Transfer To </label>
-            <select
-              id="selection"
+            <Select
               name="account_to"
-              value={destination}
-              onChange={(v) => setDestination(v.target.value)}
-            >
-              <option value="">--Please choose an option--</option>
-              <option value="savings">Savings</option>
-              <option value="checking">Checking</option>
-              <option value="other">Another Customer</option>
-            </select>
+              className="select"
+              options={accounts.concat({"value": "other", "label":"Another Customer"})}
+              onChange={(v) => setDestination(v.value)}
+            />
           </div>
           {/* State would be needed to hide or show option below */}
-          {destination === "other" && (
-            <div id="another">
-              <label htmlFor="other_account">To Account Id </label>
+          {targetAccId === "other" && (
+            <div id="another" className="form-group">
+              <label htmlFor="targetAccId">To Account Id </label>
               <input
                 type="number"
-                name="other_account"
+                name="targetAccId"
                 min="0"
                 step="1"
-                placeholder="account id"
+                placeholder="Account id"
               />
               <p></p>
-              <label htmlFor="phone">Phone of Other Customer </label>
-              <input type="text" name="phone" placeholder="phone" />
+              <label htmlFor="name">To Customer Name </label>
+              <input type="text" name="name" placeholder="Name" />
             </div>
           )}
-          <div>
-            <label htmlFor="transaction_amount">Amount </label>
+          <div className="form-group">
+            <label htmlFor="amount">Amount </label>
             <input
               type="number"
-              name="transaction_amount"
+              name="amount"
               required
               placeholder="0.00"
               min="0.00"
               step="0.01"
             />
           </div>
-          <div className="date">
-              Date:
-              <input type="text" id="date" readOnly placeholder={date}></input>
+          <div className="form-group">
+            <label htmlFor="memo">Note </label>
+            <input type="text" name="memo" className="memo" value={memo} required placeholder="e.g. borrowed money" onChange={(v) => setMemo(v.target.value)}/>
+          </div>
+          <div className="date form-group">
+              <label htmlFor="date">Date </label>
+              <input type="text" name="date" id="date" readOnly placeholder={date}></input>
           </div>
 
-          <div>
+          <div className="form-group">
             <button type="submit" className="btn">
               Submit
             </button>
             <Link to="/overview" className="cancel">
               Cancel
             </Link>
-            {/* <button type="button" name="cancel" class="cancel" onclick="history.back()">Cancel</button> */}
           </div>
         </form>
       </div>
