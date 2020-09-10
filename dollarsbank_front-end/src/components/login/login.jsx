@@ -83,12 +83,12 @@ export default function Login() {
               onChange={(v) => setPassword(v.target.value)}
             />
           </div>
-          <div>
+          <div className="form-group">
             <button type="submit" className="btn">
               Login
             </button>
           </div>
-          <div>
+          <div className="form-group">
             <p>Don't have an account? </p>
             <Link to="/register">
               <p>Register</p>

@@ -61,25 +61,62 @@ h3 {
     text-align: center;
 }
 
+h4 {
+    font-size: 20px;
+}
+
 .accountcontainer {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.balance {
-    box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
+.AccountItem {
+    box-shadow: 8px 5px 8px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    border: 1px solid lightgray;
     background-color: white;
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 30px;
+    width: 50%;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    margin: 15px;
 }
 
-.balance p {
+.AccountItem p {
     font-size: 20px;
+}
+
+.AccountName {
+    float: left;
+    text-align: left;
+    width: 60%;
+    margin-left: 20px;
+    color: purple;
+}
+
+.AccountName p {
+    margin-bottom: 5px;
+}
+
+.AccountItem .AccountType{
+    color: gray;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.AccountBalance {
+    float: right;
+    text-align: right;
+    width: 20%;
+    margin-right: 20px;
+    font-weight: bold;
+    color: gray;
+}
+
+.open-account {
+    margin-top: 15px;
 }
 
 .transactions {

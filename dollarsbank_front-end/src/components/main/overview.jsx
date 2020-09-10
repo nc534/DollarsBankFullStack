@@ -3,39 +3,52 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../App";
 
 export default function Overview() {
-  const [state, dispatch] = useContext(AppContext);
+    const [state, dispatch] = useContext(AppContext);
   // TODO get list of accounts via state.accounts and display in loop divs or something.
 
-  return (
-    <div className="customerMain">
-      <h3>Hello, {state.user.username}!</h3>
-      <Accounts />
+    return (
+        <div className="customerMain">
+        <h3>Hello, {state.user.username}!</h3>
+        <div className="accountcontainer">
+            <h4>Accounts</h4>    
+        </div>
+        <Accounts />
 
-      <div className="accountcontainer">
-        <Link to="/new-account" className="link">
-          OPEN NEW ACCOUNT
-        </Link>
-      </div>
+        <div className="accountcontainer open-account">
+            <Link to="/new-account" className="link">
+                OPEN NEW ACCOUNT
+            </Link>
+        </div>
     </div>
-  );
+    );
 }
 
 function Accounts() {
-  const [state, dispatch] = useContext(AppContext);
+    const [state, dispatch] = useContext(AppContext);
 
-  return (
-    <div className="accountcontainer">
-      {state.accounts.map((account) => {
-        return (
-          <div className="balance">
-            <p>ID: {account.id}</p>
-            <hr />
-            <p>Account: {account.accountName}</p>
-            <hr />
-            <p>Balance: ${account.balance}</p>
-          </div>
-        );
-      })}
-    </div>
-  );
+    return (
+        <div className="accountcontainer">
+            {state.accounts.map((account) => {
+                return (
+                    <div className="AccountItem">
+                        <div className="AccountName">
+                            <p>{account.accountName} - #{account.id}</p>
+                        <p className="AccountType">{(() => {
+                                switch (account.accType) {
+                                    case 0:   return "Checking";
+                                    case 1: return "Savings";
+                                    case "CHECKING": return "Checking";
+                                    case "SAVINGS": return "Savings";
+                                }
+                            })()}
+                        </p>
+                        </div>
+                        <div className="AccountBalance">
+                            <p>${account.balance}</p>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    );
 }
