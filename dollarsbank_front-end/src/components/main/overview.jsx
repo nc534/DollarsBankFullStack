@@ -30,7 +30,7 @@ function Accounts() {
         <div className="accountcontainer">
             {state.accounts.map((account) => {
                 return (
-                    <div className="AccountItem">
+                    <div className="AccountItem" key={account.id}>
                         <div className="AccountName">
                             <p>{account.accountName} - #{account.id}</p>
                         <p className="AccountType">{(() => {
