@@ -57,6 +57,8 @@ export async function getAccounts(id) {
   // Converts the provided value in cents to a display value of dollars.
   for (const account of accounts) {
     account.balance /= 100.0;
+    // TODO sort account transactions by most recent date first.
+    account.transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
   }
   return res.data;
 }
