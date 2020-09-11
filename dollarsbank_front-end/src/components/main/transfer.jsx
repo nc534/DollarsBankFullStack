@@ -1,13 +1,19 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AppContext } from "../App";
 import Select from "react-select";
+import * as Utils from "../Utils";
 
 export default function Transfer() {
+  const history = useHistory();
+  const [state, dispatch] = useContext(AppContext);
   const [sourceAccId, setSource] = useState(undefined);
-  const [targetAccId, setDestination] = useState(undefined);
+  const [targetAcc, setDestination] = useState(undefined);
+  const [targetAccId, setDestinationID] = useState(undefined);
+  const [amount, setAmount] = useState(undefined);
   const [memo, setMemo] = useState(undefined);
-  const [state] = useContext(AppContext);
+  const [nameVerify, setName] = useState(undefined);
+
   const accounts = state.accounts.map((a) => ({
     value: a.id,
     label: a.accountName,
@@ -16,6 +22,25 @@ export default function Transfer() {
   let today = new Date();
   let date =
     today.getMonth() + 1 + "/" + today.getDate() + "/" + today.getFullYear();
+
+  async function handleTransfer(event) {
+    event.preventDefault();
+    await Utils.makeTransfer(
+      sourceAccId,
+      parseInt(targetAccId),
+      parseInt(amount) * 100,
+      memo,
+      nameVerify
+    );
+    // TODO notification of success/failure.
+    // refresh accounts.
+    const resAccts = await Utils.getAccounts(state.user.id);
+    dispatch({
+      type: "SET_ACCOUNTS",
+      payload: resAccts,
+    });
+    history.push(Utils.endpoints.main);
+  }
 
   return (
     <div className="customerMain">
@@ -26,7 +51,7 @@ export default function Transfer() {
 
         {/* Change to list Account Name */}
         {/* Need to convert account name to id */}
-        <form action="" method="post" className="form">
+        <form onSubmit={handleTransfer} className="form">
           <div className="form-group">
             <label htmlFor="account_from">Transfer From </label>
             <Select
@@ -50,7 +75,7 @@ export default function Transfer() {
               onChange={(v) => setDestination(v.value)}
             />
           </div>
-          {targetAccId === "other" && (
+          {targetAcc === "other" && (
             <div id="another" className="form-group">
               <label htmlFor="targetAccId">To Account Id </label>
               <input
@@ -59,10 +84,16 @@ export default function Transfer() {
                 min="0"
                 step="1"
                 placeholder="Account id"
+                onChange={(v) => setDestinationID(v.target.value)}
               />
               <p></p>
               <label htmlFor="name">To Customer Name </label>
-              <input type="text" name="name" placeholder="Name" />
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                onChange={(v) => setName(v.target.value)}
+              />
             </div>
           )}
           <div className="form-group">
@@ -74,6 +105,7 @@ export default function Transfer() {
               placeholder="0.00"
               min="0.00"
               step="0.01"
+              onChange={(v) => setAmount(v.target.value)}
             />
           </div>
           <div className="form-group">
