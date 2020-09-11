@@ -99,18 +99,20 @@ export async function makeWithdrawal(id, amount, memo) {
 
 /**
  * Makes a transfer between the specified accounts.
- * @param {*} idSrc ID of account to withdraw from.
- * @param {*} idDest ID of account to deposit to.
- * @param {*} amount Amount of money (cents) to transfer.
- * @param {*} memo Note regarding the transfer's association.
+ * @param {Number} idSrc ID of account to withdraw from.
+ * @param {Number} idDest ID of account to deposit to.
+ * @param {Number} amount Amount of money (cents) to transfer.
+ * @param {String} memo Note regarding the transfer's association.
+ * @param {String} name Name of the account to transfer to.
  * @returns {Promise<Boolean>} A Promise resolving to a Boolean.
  */
-export async function makeTransfer(idSrc, idDest, amount, memo) {
+export async function makeTransfer(idSrc, idDest, amount, memo, name) {
   const res = await axios.post(`${API}${endpoints.makeTransfer}`, {
     sourceAccId: idSrc,
     targetAccId: idDest,
     amount,
     memo,
+    nameVerify: name,
   });
   if (res.data !== "Transaction made") {
     // TODO conditional failure.
