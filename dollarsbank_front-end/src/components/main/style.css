@@ -226,10 +226,9 @@ input {
 	cursor: pointer;
 }
 
-.error {
+.customerMain .error {
 	color: #FF0000;
-	width: 80%;
-	padding-left: 30px;
+    padding-left: 20px;
 	
 }
 

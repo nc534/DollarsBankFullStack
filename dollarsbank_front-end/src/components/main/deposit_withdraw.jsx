@@ -26,32 +26,40 @@ export default function DepositWithdraw(){
     const [account, setAccount] = useState(null);
     const [balance, setAccountBalance] = useState(null);
     const [memo, setMemo] = useState(undefined);
+    const [errorMsg, setErrorMsg] = useState(null);
 
     async function handleTransaction(event) {
         event.preventDefault();
 
-        if(transactionType === "deposit"){
-            await Utils.makeDeposit(
-                account,
-                balance,
-                memo
-            );
-        }else if (transactionType === "withdraw"){
-            await Utils.makeWithdrawal(
-                account,
-                balance,
-                memo
-            );
+        if(transactionType == undefined){
+            setErrorMsg("Choose to deposit or withdraw");
+        }else if(account == null){
+            setErrorMsg("Choose an account to transfer to or from.");
+        }else{
+            if(transactionType === "deposit"){
+                await Utils.makeDeposit(
+                    account,
+                    balance,
+                    memo
+                );
+            }else if (transactionType === "withdraw"){
+                await Utils.makeWithdrawal(
+                    account,
+                    balance,
+                    memo
+                );
+            }
+    
+            const resAccts = await Utils.getAccounts(state.user.id);
+    
+            dispatch({
+                type: "SET_ACCOUNTS",
+                payload: resAccts,
+            });
+    
+            history.push("/overview");
         }
 
-        const resAccts = await Utils.getAccounts(state.user.id);
-
-        dispatch({
-            type: "SET_ACCOUNTS",
-            payload: resAccts,
-        });
-
-        history.push("/overview");
     }
 
         return(
@@ -59,7 +67,7 @@ export default function DepositWithdraw(){
                 <div>
                     <h3>Deposit/Withdraw</h3>
                             
-                    {/* <div class="error">{ this.state.errorMsg }</div> */}
+                    <div class="error">{ errorMsg }</div>
                             
                     <form onSubmit={handleTransaction} className="form">
                     

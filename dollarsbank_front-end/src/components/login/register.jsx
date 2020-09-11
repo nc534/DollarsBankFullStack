@@ -32,40 +32,42 @@ export default function Register() {
   async function handleRegister(event) {
     event.preventDefault();
 
-    // step 1, register customer.
-    const resSignup = await Utils.register({
-      username: username,
-      password: password,
-      name: name,
-      address: address,
-      contactNumber: phone,
-    });
-    if (!resSignup) {
-      setErrorMsg("Username taken. Please try again.");
+    if(accType == null){
+      setErrorMsg(`Choose an account type.`);
       return;
-    } else {
-      dispatch({
-        type: "SET_USER",
-        payload: resSignup,
+    }else{
+      // step 1, register customer.
+      const resSignup = await Utils.register({
+        username: username,
+        password: password,
+        name: name,
+        address: address,
+        contactNumber: phone,
       });
-    }
+      if (!resSignup) {
+        setErrorMsg("Username taken. Please try again.");
+      } else {
+        dispatch({
+          type: "SET_USER",
+          payload: resSignup,
+        });
+      }
 
-    // step 2, create accounts.
-    const resAccount = await Utils.createAccount({
-      custId: resSignup.id,
-      accountName: accountName,
-      accType: accType,
-      balance: 0,
-      transactions: [],
-    });
-    if (!resAccount) {
-      setErrorMsg("Account creation failed. Please try again.");
-      return;
-    } else {
-      dispatch({
-        type: "SET_ACCOUNTS",
-        payload: resAccount,
+      // step 2, create accounts.
+      const resAccount = await Utils.createAccount({
+        custId: resSignup.id,
+        accountName: accountName,
+        accType: accType,
+        balance: 0,
+        transactions: [],
       });
+      if (!resAccount) {
+        setErrorMsg("Account creation failed. Please try again.");
+      } else {
+        dispatch({
+          type: "SET_ACCOUNTS",
+          payload: resAccount,
+        });
     }
 
     // step 3, make deposit.
@@ -76,9 +78,10 @@ export default function Register() {
     );
     if (!resDeposit) {
       setErrorMsg("Account creation failed. Please try again.");
-      return;
     }
     history.push(Utils.endpoints.login);
+    }
+
   }
 
   return (
@@ -98,7 +101,7 @@ export default function Register() {
             </div>
             <div className="form-group">
               <label htmlFor="accountName">Account Name </label>
-                <input type="text" name="accountName" className="accountName" required placeholder="Enter a name for your account" onChange={(v) => setAccountName(v.target.value)}/>
+                <input type="text" name="accountName" className="accountName" required placeholder="Enter a name for your account" onChange={(v) => setAccountName((v.target.value).trim())}/>
             </div>
             <div className="form-group">
               <label htmlFor="balance">Amount </label>
@@ -114,7 +117,7 @@ export default function Register() {
               name="name"
               required
               placeholder="name"
-              onChange={(v) => setName(v.target.value)}
+              onChange={(v) => setName((v.target.value).trim())}
             />
           </div>
           <div className="form-group">
@@ -125,7 +128,7 @@ export default function Register() {
               name="address"
               required
               placeholder="address"
-              onChange={(v) => setAddress(v.target.value)}
+              onChange={(v) => setAddress((v.target.value).trim())}
             />
           </div>
           <div className="form-group">
@@ -136,7 +139,7 @@ export default function Register() {
               name="phone"
               required
               placeholder="phone"
-              onChange={(v) => setPhone(v.target.value)}
+              onChange={(v) => setPhone((v.target.value).trim())}
             />
           </div>
           <div className="form-group">
@@ -147,7 +150,7 @@ export default function Register() {
               name="username"
               required
               placeholder="username"
-              onChange={(v) => setUsername(v.target.value)}
+              onChange={(v) => setUsername((v.target.value).trim())}
             />
           </div>
           <div className="form-group">

@@ -4,7 +4,6 @@ import { AppContext } from "../App";
 
 export default function Overview() {
   const [state] = useContext(AppContext);
-  // TODO get list of accounts via state.accounts and display in loop divs or something.
 
   return (
     <div className="customerMain">

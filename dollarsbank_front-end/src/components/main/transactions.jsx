@@ -4,10 +4,6 @@ import { AppContext } from "../App";
 export default function Transactions() {
 
     const [state] = useContext(AppContext);
-    // const transactions = state.accounts.map(a => (a.transactions.map(t =>  ({"date":t.date, "amount": t.amount, "memo": t.message}))));
-
-    // console.log(transactions);
-  // TODO fetch latest transaction when accessing this component
 
         return(
             <div className="customerMain">
