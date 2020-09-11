@@ -28,7 +28,7 @@ export default function Transfer() {
     await Utils.makeTransfer(
       sourceAccId,
       parseInt(targetAccId),
-      parseInt(amount) * 100,
+      amount * 100,
       memo,
       nameVerify
     );
