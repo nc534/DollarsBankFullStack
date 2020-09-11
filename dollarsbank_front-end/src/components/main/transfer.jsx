@@ -12,7 +12,7 @@ export default function Transfer() {
   const [targetAccId, setDestinationID] = useState(undefined);
   const [amount, setAmount] = useState(undefined);
   const [memo, setMemo] = useState(undefined);
-  const [nameVerify, setName] = useState(undefined);
+  const [nameVerify, setName] = useState(state.user.name);
 
   const accounts = state.accounts.map((a) => ({
     value: a.id,
@@ -72,7 +72,10 @@ export default function Transfer() {
                 value: "other",
                 label: "Another Customer",
               })}
-              onChange={(v) => setDestination(v.value)}
+              onChange={(v) => {
+                setDestination(v.value);
+                setDestinationID(v.value);
+              }}
             />
           </div>
           {targetAcc === "other" && (
