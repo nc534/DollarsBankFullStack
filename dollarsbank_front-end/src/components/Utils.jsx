@@ -10,6 +10,7 @@ export const endpoints = {
   main: "/main",
   makeDeposit: "/makeDeposit",
   makeWithdrawal: "/makeWithdrawal",
+  makeTransfer: "/makeTransfer",
 };
 
 export async function register(user) {
@@ -81,7 +82,7 @@ export async function makeDeposit(id, amount, memo) {
 /**
  * Makes a withdrawal from the specified account.
  * @param {String} id ID of account to withdraw from.
- * @param {Number} amount Amount of money (cents) to withdrawl.
+ * @param {Number} amount Amount of money (cents) to withdraw.
  * @param {String} memo Note regarding the withdrawal's association.
  */
 export async function makeWithdrawal(id, amount, memo) {
@@ -94,4 +95,28 @@ export async function makeWithdrawal(id, amount, memo) {
     // TODO conditional failure.
   }
   return res.data;
+}
+
+/**
+ * Makes a transfer between the specified accounts.
+ * @param {Number} idSrc ID of account to withdraw from.
+ * @param {Number} idDest ID of account to deposit to.
+ * @param {Number} amount Amount of money (cents) to transfer.
+ * @param {String} memo Note regarding the transfer's association.
+ * @param {String} name Name of the account to transfer to.
+ * @returns {Promise<Boolean>} A Promise resolving to a Boolean.
+ */
+export async function makeTransfer(idSrc, idDest, amount, memo, name) {
+  const res = await axios.post(`${API}${endpoints.makeTransfer}`, {
+    sourceAccId: idSrc,
+    targetAccId: idDest,
+    amount,
+    memo,
+    nameVerify: name,
+  });
+  if (res.data !== "Transaction made") {
+    // TODO conditional failure.
+    return false;
+  }
+  return true;
 }
