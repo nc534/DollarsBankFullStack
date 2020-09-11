@@ -31,6 +31,8 @@ export default function DepositWithdraw(){
     async function handleTransaction(event) {
         event.preventDefault();
 
+        const sourceBalance = () => {for(var a in state.accounts){if(state.accounts[a].id == account){return state.accounts[a].balance}}};
+
         if(transactionType == undefined){
             setErrorMsg("Choose to deposit or withdraw");
         }else if(account == null){
@@ -43,11 +45,17 @@ export default function DepositWithdraw(){
                     memo
                 );
             }else if (transactionType === "withdraw"){
-                await Utils.makeWithdrawal(
-                    account,
-                    balance,
-                    memo
-                );
+                if(balance > sourceBalance()){
+                    setErrorMsg("Insufficient funds to withdraw.");
+                    return;
+                }else{
+                    await Utils.makeWithdrawal(
+                        account,
+                        balance,
+                        memo
+                    );
+                }
+                
             }
     
             const resAccts = await Utils.getAccounts(state.user.id);

@@ -46,6 +46,7 @@ export default function Register() {
       });
       if (!resSignup) {
         setErrorMsg("Username taken. Please try again.");
+        return;
       } else {
         dispatch({
           type: "SET_USER",
@@ -63,6 +64,7 @@ export default function Register() {
       });
       if (!resAccount) {
         setErrorMsg("Account creation failed. Please try again.");
+        return;
       } else {
         dispatch({
           type: "SET_ACCOUNTS",
@@ -71,14 +73,12 @@ export default function Register() {
     }
 
     // step 3, make deposit.
-    const resDeposit = await Utils.makeDeposit(
+    await Utils.makeDeposit(
       resAccount.id,
       balance * 100,
       "Initial deposit."
     );
-    if (!resDeposit) {
-      setErrorMsg("Account creation failed. Please try again.");
-    }
+
     history.push(Utils.endpoints.login);
     }
 
