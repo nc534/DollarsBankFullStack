@@ -126,7 +126,8 @@ h4 {
 }
 
 .transactions table {
-    border: 20px solid #004B8C;
+    /* border: 20px solid #004B8C; */
+    width: 80%;
     padding: 10px;
     border-collapse: collapse;
 }
@@ -140,6 +141,18 @@ h4 {
 .transactions th, td {
 	border: solid black 1px;
 	padding: 10px;
+}
+
+.transDate {
+    width: 25%;
+}
+
+.transAmount {
+    width: 15%;
+}
+
+.transMessage {
+    width: 60%;
 }
 
 .accountInfo table {
