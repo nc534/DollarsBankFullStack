@@ -56,7 +56,7 @@ export default function Login() {
 
   return (
     <div className="main">
-      <h1>DOLLARSBANK Welcomes You!!</h1>
+      <h1>Dollars Bank <br/> Welcomes You!!</h1>
       <div className="container">
         <div className="header">Login</div>
         <div className="error">{errorMsg}</div>

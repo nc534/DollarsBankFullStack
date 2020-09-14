@@ -6,25 +6,31 @@ export default function Customer() {
 
   return (
     <div className="customerMain">
-      <div className="accountInfo">
+      <div className="accountcontainer accountInfo">
         <h3>Your Account Information</h3>
 
-        <table>
-          <tbody>
-            <tr>
-              <td>Name: {state.user.name}</td>
-            </tr>
-            <tr>
-              <td>Phone: {state.user.contactNumber}</td>
-            </tr>
-            <tr>
-              <td>Address: {state.user.address}</td>
-            </tr>
-            <tr>
-              <td>User Id: {state.user.username}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="customerInfo">
+          <table>
+            <tbody>
+              <tr>
+                <td className="field">User Id</td>
+                <td className="details">{state.user.username}</td>
+              </tr>
+              <tr>
+                <td className="field">Name</td>
+                <td className="details">{state.user.name}</td>
+              </tr>
+              <tr>
+                <td className="field">Phone</td>
+                <td className="details">{state.user.contactNumber}</td>
+              </tr>
+              <tr>
+                <td className="field">Address</td>
+                <td className="details">{state.user.address}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

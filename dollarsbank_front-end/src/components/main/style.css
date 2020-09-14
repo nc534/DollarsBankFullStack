@@ -16,7 +16,7 @@ body {
 nav {
     background-color:#004B8C;
     width:100%;
-    padding: 20px 0px 0px 0px;
+    padding: 10px 0px 0px 0px;
     margin: 0px;
 }
 
@@ -24,12 +24,13 @@ nav {
     font-size: 30px;
     color: white;
     text-align: center;
+    /* padding-bottom: 5px 0px 0px 0px; */
 }
 
 .nav {
     font-size: 20px;
     list-style:none;
-	margin:20px 0px 0px 0px;
+	margin:15px 0px 0px 0px;
 	padding:0px;
 	text-align:center;
 }
@@ -43,8 +44,16 @@ nav {
 
 .nav a {
 	display:inline-block;
-	padding: 30px;
-	width: 185px;
+	padding: 12px;
+    width: 185px;
+    /* border-left: 1px white solid; */
+}
+
+.nav li.active a,
+.nav li a:hover,
+.nav li.active a:focus,
+.nav li.active a:hover{
+    background-color: #0000a0;
 }
 
 .link {
@@ -134,12 +143,12 @@ h4 {
 
 .transactions thead {
     background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-    border-bottom: 2px solid #444444;
+    border-bottom: 3px solid #5f5f5f;
     color: white;
 }
 
 .transactions th, td {
-	border: solid black 1px;
+	border: solid #969696 1px;
 	padding: 10px;
 }
 
@@ -159,12 +168,30 @@ h4 {
     margin: auto;
     align-items: center;
     font-size: 20px;
-    padding-top: 30px;
 }
 
 .accountInfo td {
     padding: 20px;
     border: none;
+}
+
+.customerInfo {
+    box-shadow: 8px 5px 8px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    background-color: white;
+    width: 30%;
+    align-items: center;
+    margin: 15px;
+}
+
+.field {
+    font-weight: bold;
+    color: rgb(80, 79, 79);
+}
+
+.details {
+    color: #2386c8;
 }
 
 .accountcontainer a {
