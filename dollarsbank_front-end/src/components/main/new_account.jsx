@@ -11,6 +11,7 @@ export default function NewAccount() {
   const [type, setAccountType] = useState(null);
   const [name, setAccountName] = useState(null);
   const [balance, setAccountBalance] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const accType = [
     {
@@ -23,41 +24,41 @@ export default function NewAccount() {
     },
   ];
 
+  const accountExists = () => {for(var a in state.accounts){if(state.accounts[a].accountName === name){return true}}};
+
   async function handleSubmit(event) {
     event.preventDefault();
 
-    // step 1, create account.
-    const resAccount = await Utils.createAccount({
-      custId: state.user.id,
-      accountName: name,
-      accType: type,
-      balance: 0,
-      transactions: [],
-    });
-    if (!resAccount) {
-      // setErrorMsg("Account creation failed. Please try again.");
-      return;
-    }
+    if(accountExists()){
+      setErrorMsg(`An account with the name (${name}) already exists.`);
+    }else if(type == null){
+      setErrorMsg(`Choose an account type.`);
+    }else{
+      // step 1, create account.
+      const resAccount = await Utils.createAccount({
+        custId: state.user.id,
+        accountName: name,
+        accType: type,
+        balance: 0,
+        transactions: [],
+      });
 
-    // step 2, make deposit.
-    const resDeposit = await Utils.makeDeposit(
-      resAccount.id,
-      balance * 100,
-      "Initial deposit."
-    );
-    if (!resDeposit) {
-      // setErrorMsg("Account creation failed. Please try again.");
-      return;
-    }
+      // step 2, make deposit.
+      await Utils.makeDeposit(
+        resAccount.id,
+        balance * 100,
+        "Initial deposit."
+      );
 
-    // step 3, refresh accounts.
-    const resAccts = await Utils.getAccounts(state.user.id);
-    // TODO error handling.
-    dispatch({
-      type: "SET_ACCOUNTS",
-      payload: resAccts,
-    });
-    history.push(Utils.endpoints.main);
+      // step 3, refresh accounts.
+      const resAccts = await Utils.getAccounts(state.user.id);
+      dispatch({
+        type: "SET_ACCOUNTS",
+        payload: resAccts,
+      });
+      history.push(Utils.endpoints.main);
+    }
+    
   }
 
   return (
@@ -65,7 +66,7 @@ export default function NewAccount() {
       <div>
         <h3>New Account</h3>
 
-        {/* <div class="error">{ this.state.errorMsg }</div>*/}
+        <div class="error">{ errorMsg }</div>
 
         <form onSubmit={handleSubmit} className="form">
           <div className="form-group">
@@ -86,7 +87,7 @@ export default function NewAccount() {
               className="accountName"
               required
               placeholder="Enter a name for your account"
-              onChange={(v) => setAccountName(v.target.value)}
+              onChange={(v) => setAccountName((v.target.value).trim())}
             />
           </div>
           <div className="form-group">

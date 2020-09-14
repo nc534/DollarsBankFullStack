@@ -13,11 +13,14 @@ export default function Transfer() {
   const [amount, setAmount] = useState(undefined);
   const [memo, setMemo] = useState(undefined);
   const [nameVerify, setName] = useState(state.user.name);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const accounts = state.accounts.map((a) => ({
     value: a.id,
     label: a.accountName,
   }));
+
+  const sourceBalance = () => {for(var a in state.accounts){if(state.accounts[a].id == sourceAccId){return state.accounts[a].balance}}};
 
   let today = new Date();
   let date =
@@ -25,21 +28,34 @@ export default function Transfer() {
 
   async function handleTransfer(event) {
     event.preventDefault();
-    await Utils.makeTransfer(
-      sourceAccId,
-      parseInt(targetAccId),
-      amount * 100,
-      memo,
-      nameVerify
-    );
-    // TODO notification of success/failure.
-    // refresh accounts.
-    const resAccts = await Utils.getAccounts(state.user.id);
-    dispatch({
-      type: "SET_ACCOUNTS",
-      payload: resAccts,
-    });
-    history.push(Utils.endpoints.main);
+
+    if(amount > sourceBalance()){
+      setErrorMsg("Insufficient funds to make transfer.");
+    }else if(targetAccId == sourceAccId){
+      setErrorMsg("Cannot transfer funds to the same account.");
+    }else if (targetAcc == undefined || sourceAccId == undefined){
+      setErrorMsg("Choose an account to transfer to or from.");
+    }else{
+      const transfer = await Utils.makeTransfer(
+        sourceAccId,
+        parseInt(targetAccId),
+        amount * 100,
+        memo,
+        nameVerify
+      );
+
+      const resAccts = await Utils.getAccounts(state.user.id);
+          dispatch({
+            type: "SET_ACCOUNTS",
+            payload: resAccts,
+          });
+
+      if(targetAcc ==="other" && transfer){
+        setErrorMsg(`Account Id (#${targetAccId}) with name (${nameVerify}) does not exist.`);
+      }else{
+        history.push(Utils.endpoints.main);
+      }
+    }
   }
 
   return (
@@ -47,10 +63,8 @@ export default function Transfer() {
       <div>
         <h3>Transfer</h3>
 
-        {/* <div class="error">{ this.state.errorMsg }</div> */}
+        <div class="error">{ errorMsg }</div>
 
-        {/* Change to list Account Name */}
-        {/* Need to convert account name to id */}
         <form onSubmit={handleTransfer} className="form">
           <div className="form-group">
             <label htmlFor="account_from">Transfer From </label>
@@ -61,8 +75,7 @@ export default function Transfer() {
               onChange={(v) => setSource(v.value)}
             />
           </div>
-          {/* Change to list Account Name */}
-          {/* Need to convert account name to id */}
+
           <div className="form-group">
             <label htmlFor="account_to">Transfer To </label>
             <Select
@@ -95,7 +108,7 @@ export default function Transfer() {
                 type="text"
                 name="name"
                 placeholder="Name"
-                onChange={(v) => setName(v.target.value)}
+                onChange={(v) => setName((v.target.value).trim())}
               />
             </div>
           )}

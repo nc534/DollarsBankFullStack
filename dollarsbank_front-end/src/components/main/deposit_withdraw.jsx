@@ -26,32 +26,48 @@ export default function DepositWithdraw(){
     const [account, setAccount] = useState(null);
     const [balance, setAccountBalance] = useState(null);
     const [memo, setMemo] = useState(undefined);
+    const [errorMsg, setErrorMsg] = useState(null);
 
     async function handleTransaction(event) {
         event.preventDefault();
 
-        if(transactionType === "deposit"){
-            await Utils.makeDeposit(
-                account,
-                balance,
-                memo
-            );
-        }else if (transactionType === "withdraw"){
-            await Utils.makeWithdrawal(
-                account,
-                balance,
-                memo
-            );
+        const sourceBalance = () => {for(var a in state.accounts){if(state.accounts[a].id == account){return state.accounts[a].balance}}};
+
+        if(transactionType == undefined){
+            setErrorMsg("Choose to deposit or withdraw");
+        }else if(account == null){
+            setErrorMsg("Choose an account to transfer to or from.");
+        }else{
+            if(transactionType === "deposit"){
+                await Utils.makeDeposit(
+                    account,
+                    balance,
+                    memo
+                );
+            }else if (transactionType === "withdraw"){
+                if(balance > sourceBalance()){
+                    setErrorMsg("Insufficient funds to withdraw.");
+                    return;
+                }else{
+                    await Utils.makeWithdrawal(
+                        account,
+                        balance,
+                        memo
+                    );
+                }
+                
+            }
+    
+            const resAccts = await Utils.getAccounts(state.user.id);
+    
+            dispatch({
+                type: "SET_ACCOUNTS",
+                payload: resAccts,
+            });
+    
+            history.push("/overview");
         }
 
-        const resAccts = await Utils.getAccounts(state.user.id);
-
-        dispatch({
-            type: "SET_ACCOUNTS",
-            payload: resAccts,
-        });
-
-        history.push("/overview");
     }
 
         return(
@@ -59,7 +75,7 @@ export default function DepositWithdraw(){
                 <div>
                     <h3>Deposit/Withdraw</h3>
                             
-                    {/* <div class="error">{ this.state.errorMsg }</div> */}
+                    <div class="error">{ errorMsg }</div>
                             
                     <form onSubmit={handleTransaction} className="form">
                     
