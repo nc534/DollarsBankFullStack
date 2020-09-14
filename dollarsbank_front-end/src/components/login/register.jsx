@@ -7,7 +7,7 @@ import { AppContext } from "../App";
 
 export default function Register() {
   const history = useHistory();
-  const [state, dispatch] = useContext(AppContext);
+  const [dispatch] = useContext(AppContext);
 
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);

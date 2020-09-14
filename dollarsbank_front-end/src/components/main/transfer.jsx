@@ -20,7 +20,7 @@ export default function Transfer() {
     label: a.accountName,
   }));
 
-  const sourceBalance = () => {for(var a in state.accounts){if(state.accounts[a].id == sourceAccId){return state.accounts[a].balance}}};
+  const sourceBalance = () => {for(var a in state.accounts){if(state.accounts[a].id === sourceAccId){return state.accounts[a].balance}}};
 
   let today = new Date();
   let date =
@@ -31,9 +31,9 @@ export default function Transfer() {
 
     if(amount > sourceBalance()){
       setErrorMsg("Insufficient funds to make transfer.");
-    }else if(targetAccId == sourceAccId){
+    }else if(targetAccId === sourceAccId){
       setErrorMsg("Cannot transfer funds to the same account.");
-    }else if (targetAcc == undefined || sourceAccId == undefined){
+    }else if (targetAcc === undefined || sourceAccId === undefined){
       setErrorMsg("Choose an account to transfer to or from.");
     }else{
       const transfer = await Utils.makeTransfer(
@@ -63,7 +63,7 @@ export default function Transfer() {
       <div>
         <h3>Transfer</h3>
 
-        <div class="error">{ errorMsg }</div>
+        <div className="error">{ errorMsg }</div>
 
         <form onSubmit={handleTransfer} className="form">
           <div className="form-group">

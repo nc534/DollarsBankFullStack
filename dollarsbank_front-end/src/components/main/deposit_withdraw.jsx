@@ -31,9 +31,9 @@ export default function DepositWithdraw(){
     async function handleTransaction(event) {
         event.preventDefault();
 
-        const sourceBalance = () => {for(var a in state.accounts){if(state.accounts[a].id == account){return state.accounts[a].balance}}};
+        const sourceBalance = () => {for(var a in state.accounts){if(state.accounts[a].id === account){return state.accounts[a].balance}}};
 
-        if(transactionType == undefined){
+        if(transactionType === undefined){
             setErrorMsg("Choose to deposit or withdraw");
         }else if(account == null){
             setErrorMsg("Choose an account to transfer to or from.");
@@ -75,7 +75,7 @@ export default function DepositWithdraw(){
                 <div>
                     <h3>Deposit/Withdraw</h3>
                             
-                    <div class="error">{ errorMsg }</div>
+                    <div className="error">{ errorMsg }</div>
                             
                     <form onSubmit={handleTransaction} className="form">
                     

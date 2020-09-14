@@ -21,7 +21,7 @@ export default function Login() {
       type: "SET_ACCOUNTS",
       payload: [],
     });
-  }, []);
+  }, [dispatch]);
 
   async function handleLogin(event) {
     event.preventDefault();
