@@ -92,7 +92,6 @@ export default function NewAccount() {
           </div>
           <div className="form-group">
             <label htmlFor="balance">Amount </label>
-            {/* Need to change the value to pennies */}
             <input
               type="number"
               name="balance"

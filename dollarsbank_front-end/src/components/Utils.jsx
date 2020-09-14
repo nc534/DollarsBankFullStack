@@ -75,9 +75,6 @@ export async function makeDeposit(id, amount, memo) {
     amount,
     memo,
   });
-  if (res.data !== "Deposit done") {
-    // TODO conditional failure.
-  }
   return res.data;
 }
 
@@ -93,9 +90,6 @@ export async function makeWithdrawal(id, amount, memo) {
     amount,
     memo,
   });
-  if (res.data !== "success") {
-    // TODO conditional failure.
-  }
   return res.data;
 }
 
@@ -116,9 +110,5 @@ export async function makeTransfer(idSrc, idDest, amount, memo, name) {
     memo,
     nameVerify: name,
   });
-  if (res.data !== "Transaction made") {
-    // TODO conditional failure.
-    return false;
-  }
   return true;
 }

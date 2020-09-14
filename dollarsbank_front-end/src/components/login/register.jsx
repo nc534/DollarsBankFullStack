@@ -105,7 +105,6 @@ export default function Register() {
             </div>
             <div className="form-group">
               <label htmlFor="balance">Amount </label>
-                {/* Need to change the value to pennies */}
                 <input type="number" name="balance" required placeholder="0.00" min="0.00" step="0.01" onChange={(v) => setAccountBalance(v.target.value)}/>
             </div>
           </div>

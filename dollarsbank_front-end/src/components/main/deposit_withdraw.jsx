@@ -87,8 +87,6 @@ export default function DepositWithdraw(){
                                     onChange={(v) => setTransactionType(v.value)}
                             />
                         </div>
-                        {/* Change to list Account Name */}
-                        {/* Need to convert account name to id */}
                         <div className="form-group">
                             <label htmlFor="account">Account </label>
                             <Select name="account"
