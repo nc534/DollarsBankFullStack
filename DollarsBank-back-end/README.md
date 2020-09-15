@@ -1,75 +1,80 @@
 ## Accessing the database
 
 ### Customer Data
-Types:
-  id              long      Customer specific id given by SQL server on creation  
-  username        String    Username of Customer, used to log in  
-  password        String    Password of Customer, used to log in  
-  name            String    Full Name of Customer, used in verifying transfers  
-  address         String    Mailing address of Customer  
-  contactNumber   String    Phone number of Customer
+| Name | Type | Description |
+| --- | --- | ---|
+| id            | long   | Customer specific id given by SQL server on creation | 
+| username      | String | Username of Customer, used to log in                 |
+| password      | String | Password of Customer, used to log in                 |
+| name          | String | Full Name of Customer, used in verifying transfers   |
+| address       | String | Mailing address of Customer                          |
+| contactNumber | String | Phone number of Customer                             |
 
 #### Obtain Customer
-url:          http://localhost:8080/login  
-method:       POST  
-json inputs:  username, password
+| url | method| json inputs |
+| --- | --- | --- |
+| http://localhost:8080/login | POST | username, password |
 
 #### Register Customer
-url:          http://localhost:8080/signup  
-method:       POST  
-json input:   username, password, name, address, contactNumber
+| url | method| json inputs |
+| --- | --- | --- |
+| http://localhost:8080/signup | POST | username, password, name, address, contactNumber |
 
 #### Delete Customer
-url:          http://localhost:8080/deleteUser  
-method:       DELETE  
-json input:   id, username, password
+| url | method| json inputs |
+| --- | --- | --- |
+| http://localhost:8080/deleteUser | DELETE | id, username, password |
 
 ### Account Data
-Types:
-  custId          long      Customer specific id given by SQL server on creation, used by Accounts to track owner  
-  accountName     String    Name of Account given by Customer, unique to each Customer  
-  accType         enum      "CHECKING" or "SAVINGS" for such Accounts respectively
+| Name | Type | Description |
+| --- | --- | --- |
+| custId      | long   | Customer specific id given by SQL server on creation, used by Accounts to track owner |
+| accountName | String | Name of Account given by Customer, unique to each Customer                            |
+| accType     | enum   | "CHECKING" or "SAVINGS" for such Accounts respectively                                |
 
 #### Obtain All Accounts Of A Customer
-url:          http://localhost:8080/showAllAcct/{custId}  
-method:       GET
+| url | method|
+| --- | --- |
+| http://localhost:8080/showAllAcct/{custId} | GET |
 
 #### Obtain Account
-url:          http://localhost:8080/showAcct/{custId}/{accountName}  
-method:       GET
+| url | method|
+| --- | --- |
+| http://localhost:8080/showAcct/{custId}/{accountName} | GET |
 
 #### Add Account
-url:          http://localhost:8080/addacct  
-method:       POST  
-json input:   custId, accountName, accType
+| url | method| json inputs |
+| --- | --- | --- |
+| http://localhost:8080/addacct | POST | custId, accountName, accType |
 
 #### Delete Account
-url:          http://localhost:8080/deleteAcct  
-method:       DELETE  
-json input:   custId, accountName
+| url | method| json inputs |
+| --- | --- | --- |
+| http://localhost:8080/deleteAcct | DELETE | custId, accountName |
 
 ### Perform Transaction
-Types:
-  sourceAccId     long      Account specific id given by SQL server on creation, this is for 'sender' Accounts  
-  targetAccId     long      Account specific id given by SQL server on creation, this is for 'recipient' Accounts  
-  amount          long      The sum of money, in pennies, that is part of the transaction  
-  nameVerify      String    Some or all of the full name of the recipient, used to ensure correctnes on the part of the 'sender'  
-  memo            String    A message or memo a Customer has provided as an explanation of the transaction
-  
+| Name | Type | Description |
+| --- | --- | --- |
+| sourceAccId | long   | Account specific id given by SQL server on creation, this is for 'sender' Accounts                   |
+| targetAccId | long   | Account specific id given by SQL server on creation, this is for 'recipient' Accounts                |
+| amount      | long   | The sum of money, in pennies, that is part of the transaction                                        |
+| nameVerify  | String | Some or all of the full name of the recipient, used to ensure correctnes on the part of the 'sender' |
+| memo        | String | A message or memo a Customer has provided as an explanation of the transaction                       |
+                                                                                                                              |
 #### Deposit
-url:          http://localhost:8080/makeDeposit  
-method:       POST  
-json input:   targetAccId, amount, memo
+| url | method| json inputs |
+| --- | --- | --- |
+| http://localhost:8080/makeDeposit | POST | targetAccId, amount, memo |
 
 #### Withdraw
-url:          http://localhost:8080/makeWithdrawal  
-method:       POST  
-json input:   sourceAccId, amount, memo
+| url | method| json inputs |
+| --- | --- | --- |
+| http://localhost:8080/makeWithdrawal | POST | sourceAccId, amount, memo |
 
 #### Transfer
-url:          http://localhost:8080/makeTransfer  
-method:       POST  
-json input:   sourceAccId, targetAccId, nameVerify, amount, memo
+| url | method| json inputs |
+| --- | --- | --- |
+| http://localhost:8080/makeTransfer | POST | sourceAccId, targetAccId, nameVerify, amount, memo |
 
 ## Encryption
 
