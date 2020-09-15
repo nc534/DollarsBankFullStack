@@ -78,4 +78,4 @@
 
 ## Encryption
 
-The only variable that is ever encrypted is Customer.password, and the only time it is expected to be unencrypted is on Customer registration, at which point the encryption is applied. After that, all operations which take the password must use the encrypted variant.
+The encryption is meant to prevent malicious entities from knowing a Customer's password, and so is applied to the password after registration and login. Consequently these two operations do not require the input password to be encrypted, however Customer deletion does.
