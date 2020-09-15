@@ -22,6 +22,7 @@ public class TransactionService {
     Customer customer = new Customer();
     Account account = new Account();
 
+/************Making Transfer***********/
 
     public String makeTransfer(PendingTransaction transfer){
 
@@ -57,6 +58,8 @@ public class TransactionService {
         return "Transaction made";
     }
 
+    /****************Deposit******************/
+
 
     public String deposit(PendingTransaction deposit) {
 
@@ -84,6 +87,9 @@ public class TransactionService {
         return "Deposit done";
 
     }
+
+
+    /****************Withdrawal*********************/
 
     public String withdrawal(PendingTransaction withdrawal) {
 
